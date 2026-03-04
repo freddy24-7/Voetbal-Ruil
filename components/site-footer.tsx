@@ -1,0 +1,37 @@
+"use client"
+
+import { useLanguage } from "@/lib/language-context"
+
+export function SiteFooter() {
+  const { t } = useLanguage()
+  const year = new Date().getFullYear()
+
+  return (
+    <footer className="border-t bg-[#0A3038] text-[#A8C5CC]">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-8 sm:flex-row lg:px-8">
+        <div className="flex items-center gap-2">
+          <div className="flex size-7 items-center justify-center rounded-md bg-gradient-to-br from-[#1A59FC] to-[#0C90FF]">
+            <span className="text-xs font-bold text-[#FFFFFF]">VR</span>
+          </div>
+          <span className="text-sm text-[#6B9AA3]">
+            &copy; {year} Voetbal-Ruil. {t.rights}
+          </span>
+        </div>
+        <nav className="flex items-center gap-6">
+          <a
+            href="#"
+            className="text-sm text-[#6B9AA3] transition-colors hover:text-[#E8F0F2]"
+          >
+            {t.privacy}
+          </a>
+          <a
+            href="#"
+            className="text-sm text-[#6B9AA3] transition-colors hover:text-[#E8F0F2]"
+          >
+            {t.terms}
+          </a>
+        </nav>
+      </div>
+    </footer>
+  )
+}

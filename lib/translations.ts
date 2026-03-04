@@ -1,0 +1,188 @@
+export type Locale = "nl" | "en"
+
+export const translations = {
+  nl: {
+    // Header
+    about: "Over Ons",
+    viewOptions: "Bekijk Opties",
+    upload: "Uploaden",
+    // Hero
+    heroTitle: "Voetbalschoenen Ruilen",
+    heroSubtitle: "De Nederlandse marktplaats voor tweedehands kinder voetbalschoenen.",
+    searchLabel: "Vind schoenen in jouw buurt",
+    allProvinces: "Alle Provincies",
+    // Grid
+    province: "Provincie",
+    contact: "Contact",
+    noResults: "Geen schoenen gevonden in deze provincie.",
+    size: "Maat",
+    // Contact Modal
+    contactTitle: "Neem Contact Op",
+    contactDescription: "Stuur een bericht naar de verkoper.",
+    name: "Naam",
+    email: "E-mail",
+    message: "Bericht",
+    send: "Verstuur",
+    namePlaceholder: "Jouw naam",
+    emailPlaceholder: "jouw@email.nl",
+    messagePlaceholder: "Ik ben geïnteresseerd in deze schoenen...",
+    // Upload Modal
+    uploadTitle: "Schoenen Uploaden",
+    uploadDescription: "Plaats jouw voetbalschoenen op de marktplaats.",
+    title: "Titel",
+    titlePlaceholder: "bijv. Nike Jr. Mercurial - Maat 33",
+    sizePlaceholder: "bijv. 33",
+    selectProvince: "Selecteer een provincie",
+    photo: "Foto",
+    dropzoneText: "Sleep je foto hierheen of klik om te uploaden",
+    dropzoneHint: "PNG, JPG tot 5MB",
+    uploadButton: "Plaatsen",
+    // Footer
+    privacy: "Privacy",
+    terms: "Algemene Voorwaarden",
+    rights: "Alle rechten voorbehouden.",
+  },
+  en: {
+    // Header
+    about: "About",
+    viewOptions: "View Options",
+    upload: "Upload",
+    // Hero
+    heroTitle: "Swap Football Shoes",
+    heroSubtitle: "The Dutch marketplace for second-hand kids' football shoes.",
+    searchLabel: "Find shoes in your area",
+    allProvinces: "All Provinces",
+    // Grid
+    province: "Province",
+    contact: "Contact",
+    noResults: "No shoes found in this province.",
+    size: "Size",
+    // Contact Modal
+    contactTitle: "Get in Touch",
+    contactDescription: "Send a message to the seller.",
+    name: "Name",
+    email: "Email",
+    message: "Message",
+    send: "Send",
+    namePlaceholder: "Your name",
+    emailPlaceholder: "your@email.com",
+    messagePlaceholder: "I'm interested in these shoes...",
+    // Upload Modal
+    uploadTitle: "Upload Shoes",
+    uploadDescription: "List your football shoes on the marketplace.",
+    title: "Title",
+    titlePlaceholder: "e.g. Nike Jr. Mercurial - Size 33",
+    sizePlaceholder: "e.g. 33",
+    selectProvince: "Select a province",
+    photo: "Photo",
+    dropzoneText: "Drag your photo here or click to upload",
+    dropzoneHint: "PNG, JPG up to 5MB",
+    uploadButton: "Submit",
+    // Footer
+    privacy: "Privacy",
+    terms: "Terms of Service",
+    rights: "All rights reserved.",
+  },
+} as const
+
+export const provinces = [
+  "Drenthe",
+  "Flevoland",
+  "Friesland",
+  "Gelderland",
+  "Groningen",
+  "Limburg",
+  "Noord-Brabant",
+  "Noord-Holland",
+  "Overijssel",
+  "Utrecht",
+  "Zeeland",
+  "Zuid-Holland",
+]
+
+export const mockShoes = [
+  {
+    id: 1,
+    title: "Nike Jr. Mercurial - Maat 33",
+    province: "Noord-Holland",
+    size: "33",
+    image: "https://images.unsplash.com/photo-1511886929837-354d827aae26?w=400&h=300&fit=crop",
+  },
+  {
+    id: 2,
+    title: "Adidas Predator Edge - Maat 35",
+    province: "Zuid-Holland",
+    size: "35",
+    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=300&fit=crop",
+  },
+  {
+    id: 3,
+    title: "Puma Future Z - Maat 31",
+    province: "Utrecht",
+    size: "31",
+    image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=300&fit=crop",
+  },
+  {
+    id: 4,
+    title: "Nike Phantom GT - Maat 34",
+    province: "Gelderland",
+    size: "34",
+    image: "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=400&h=300&fit=crop",
+  },
+  {
+    id: 5,
+    title: "Adidas X Speedflow - Maat 36",
+    province: "Noord-Brabant",
+    size: "36",
+    image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&h=300&fit=crop",
+  },
+  {
+    id: 6,
+    title: "Nike Tiempo Legend - Maat 32",
+    province: "Overijssel",
+    size: "32",
+    image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=400&h=300&fit=crop",
+  },
+  {
+    id: 7,
+    title: "Puma Ultra 1.4 - Maat 30",
+    province: "Friesland",
+    size: "30",
+    image: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=400&h=300&fit=crop",
+  },
+  {
+    id: 8,
+    title: "Adidas Copa Sense - Maat 33",
+    province: "Limburg",
+    size: "33",
+    image: "https://images.unsplash.com/photo-1539185441755-769473a23570?w=400&h=300&fit=crop",
+  },
+  {
+    id: 9,
+    title: "Nike Jr. Vapor 15 - Maat 35",
+    province: "Groningen",
+    size: "35",
+    image: "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=400&h=300&fit=crop",
+  },
+  {
+    id: 10,
+    title: "Adidas Predator Accuracy - Maat 34",
+    province: "Zeeland",
+    size: "34",
+    image: "https://images.unsplash.com/photo-1584735175315-9d5df23860e6?w=400&h=300&fit=crop",
+  },
+  {
+    id: 11,
+    title: "Nike Mercurial Superfly - Maat 37",
+    province: "Noord-Holland",
+    size: "37",
+    image: "https://images.unsplash.com/photo-1605348532760-6753d2c43329?w=400&h=300&fit=crop",
+  },
+  {
+    id: 12,
+    title: "Puma King Platinum - Maat 32",
+    province: "Flevoland",
+    size: "32",
+    image: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=400&h=300&fit=crop",
+  },
+]
