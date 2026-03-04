@@ -6,11 +6,16 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "dev:backend": "ts-node backend/src/main.ts",
-    "build:backend": "tsc -p backend/tsconfig.json"
+    "dev:backend": "tsc -p backend/tsconfig.json && node backend/dist/main.js",
+    "build:backend": "tsc -p backend/tsconfig.json",
+    "seed": "tsc -p backend/tsconfig.json && node backend/dist/seed.js",
+    "postinstall": "find node_modules -mindepth 3 -maxdepth 3 -type d -name 'uuid' -path '*/node_modules/*/node_modules/uuid' | xargs rm -rf"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
+    "@loopback/core": "^6.0.0",
+    "@loopback/repository": "^8.0.9",
+    "@loopback/rest": "^14.0.0",
     "@radix-ui/react-accordion": "1.2.12",
     "@radix-ui/react-alert-dialog": "1.1.15",
     "@radix-ui/react-aspect-ratio": "1.1.8",
@@ -43,10 +48,13 @@
     "clsx": "^2.1.1",
     "cmdk": "1.1.1",
     "date-fns": "4.1.0",
+    "dotenv": "^17.3.1",
     "embla-carousel-react": "8.6.0",
-    "input-otp": "1.4.2",
     "framer-motion": "^11.15.0",
+    "input-otp": "1.4.2",
+    "loopback-connector-mysql": "^8.0.6",
     "lucide-react": "^0.564.0",
+    "mysql2": "^3.18.2",
     "next-themes": "^0.4.6",
     "react": "19.2.4",
     "react-day-picker": "9.13.2",
@@ -54,13 +62,18 @@
     "react-hook-form": "^7.54.1",
     "react-resizable-panels": "^2.1.7",
     "recharts": "2.15.0",
+    "reflect-metadata": "^0.2.2",
     "sonner": "^1.7.1",
     "tailwind-merge": "^3.3.1",
+    "uuid": "8.3.2",
     "vaul": "^1.1.2",
-    "zod": "^3.24.1",
-    "@loopback/core": "^6.0.0",
-    "@loopback/rest": "^14.0.0",
-    "reflect-metadata": "^0.2.2"
+    "zod": "^3.24.1"
+  },
+  "overrides": {
+    "uuid": "^8.3.2"
+  },
+  "resolutions": {
+    "uuid": "8.3.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.0",
