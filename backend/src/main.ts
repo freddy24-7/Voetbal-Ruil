@@ -6,10 +6,10 @@ import { BackendApplication } from "./application"
 export async function main(config: ApplicationConfig = {}) {
   const app = new BackendApplication({
     rest: {
-      port: 3001,
+      port: Number(process.env.PORT ?? 3001),
       host: "0.0.0.0",
       cors: {
-        origin: "*",
+        origin: process.env.CORS_ORIGIN ?? "*",
         methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
       },
     } as RestServerConfig,

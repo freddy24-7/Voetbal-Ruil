@@ -113,6 +113,7 @@ export const translations = {
     errorSendMessage: "Verzenden mislukt. Probeer het opnieuw.",
     errorSubmitListing: "Plaatsen mislukt. Probeer het opnieuw.",
     errorSaveChanges: "Opslaan mislukt. Probeer het opnieuw.",
+    errorDeleteShoe: "Verwijderen mislukt. Probeer het opnieuw.",
     // Accessibility
     toggleTheme: "Thema wisselen",
     openMenu: "Menu openen",
@@ -234,6 +235,7 @@ export const translations = {
     errorSendMessage: "Failed to send message. Please try again.",
     errorSubmitListing: "Failed to submit. Please try again.",
     errorSaveChanges: "Failed to save changes. Please try again.",
+    errorDeleteShoe: "Failed to delete listing. Please try again.",
     // Accessibility
     toggleTheme: "Toggle theme",
     openMenu: "Open menu",

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 import { AboutSection } from "@/components/about-section"
 import { ContactModal } from "@/components/contact-modal"
@@ -11,13 +11,15 @@ import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { TechModal } from "@/components/tech-modal"
 import { UploadModal } from "@/components/upload-modal"
-import { fetchShoes, deleteShoe } from "@/lib/api"
+import { useToast } from "@/hooks/use-toast"
+import { deleteShoe, fetchShoes } from "@/lib/api"
 import { LanguageProvider, useLanguage } from "@/lib/language-context"
 import { removeOwnedShoe } from "@/lib/owned-shoes"
 import type { Shoe } from "@/lib/types"
 
 function VoetbalRuilApp() {
   const { t } = useLanguage()
+  const { toast } = useToast()
   const [selectedProvince, setSelectedProvince] = useState("all")
   const [contactOpen, setContactOpen] = useState(false)
   const [uploadOpen, setUploadOpen] = useState(false)
@@ -52,9 +54,19 @@ function VoetbalRuilApp() {
   }
 
   const handleDeleteClick = async (shoe: Shoe) => {
-    await deleteShoe(shoe.id)
-    removeOwnedShoe(shoe.id)
-    loadShoes()
+    try {
+      await deleteShoe(shoe.id)
+      removeOwnedShoe(shoe.id)
+      loadShoes()
+    } catch (error) {
+      // Surface backend failures to the user instead of silently swallowing them
+      console.error("Failed to delete shoe", error)
+      toast({
+        variant: "destructive",
+        title: t.deleteConfirmTitle,
+        description: t.errorDeleteShoe,
+      })
+    }
   }
 
   return (
