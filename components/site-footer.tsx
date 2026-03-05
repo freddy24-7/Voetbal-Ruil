@@ -1,10 +1,11 @@
 "use client"
 
 import { useState } from "react"
-import { useLanguage } from "@/lib/language-context"
+
 import { GeneralContactModal } from "@/components/general-contact-modal"
 import { PrivacyModal } from "@/components/privacy-modal"
 import { TermsModal } from "@/components/terms-modal"
+import { useLanguage } from "@/lib/language-context"
 
 export function SiteFooter() {
   const { t } = useLanguage()

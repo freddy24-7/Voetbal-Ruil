@@ -1,6 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState, type ReactNode } from "react"
+
 import { type Locale, translations } from "@/lib/translations"
 
 type LanguageContextType = {

@@ -49,7 +49,8 @@ export const translations = {
     cancel: "Annuleren",
     // About
     aboutTitle: "Wat is Voetbal-Ruil?",
-    aboutIntro: "Kinderen groeien snel. Voetbalschoenen niet mee. Voetbal-Ruil is een gratis marktplaats waar ouders tweedehands voetbalschoenen van goede kwaliteit kunnen aanbieden of vinden — dicht bij huis, zonder gedoe.",
+    aboutIntro:
+      "Kinderen groeien snel. Voetbalschoenen niet mee. Voetbal-Ruil is een gratis marktplaats waar ouders tweedehands voetbalschoenen van goede kwaliteit kunnen aanbieden of vinden — dicht bij huis, zonder gedoe.",
     aboutHowTitle: "Hoe werkt het?",
     aboutStep1Title: "Zoek op provincie",
     aboutStep1: "Bekijk het beschikbare aanbod in jouw regio.",
@@ -58,38 +59,53 @@ export const translations = {
     aboutStep3Title: "Bied jouw schoenen aan",
     aboutStep3: "Klik op Uploaden en zet jouw schoenen online in minder dan een minuut.",
     aboutWhyTitle: "Waarom Voetbal-Ruil?",
-    aboutWhy: "Nieuwe voetbalschoenen zijn duur. Tweedehands ruilen is duurzaam, betaalbaar en helpt andere voetbalfamilies. Samen houden we kinderen op het veld.",
+    aboutWhy:
+      "Nieuwe voetbalschoenen zijn duur. Tweedehands ruilen is duurzaam, betaalbaar en helpt andere voetbalfamilies. Samen houden we kinderen op het veld.",
     // Privacy Modal
     privacyWhoTitle: "Wie zijn wij?",
-    privacyWho: "Voetbal-Ruil is een gratis online marktplaats voor tweedehands kinder voetbalschoenen, bedoeld als dienst voor particulieren in Nederland.",
+    privacyWho:
+      "Voetbal-Ruil is een gratis online marktplaats voor tweedehands kinder voetbalschoenen, bedoeld als dienst voor particulieren in Nederland.",
     privacyDataTitle: "Welke gegevens verwerken wij?",
-    privacyData: "Wij verwerken alleen de gegevens die jij actief invoert: jouw naam, e-mailadres en het bericht dat je stuurt via het contactformulier. Wij slaan geen wachtwoorden, betalingsgegevens of locatiegegevens op.",
+    privacyData:
+      "Wij verwerken alleen de gegevens die jij actief invoert: jouw naam, e-mailadres en het bericht dat je stuurt via het contactformulier. Wij slaan geen wachtwoorden, betalingsgegevens of locatiegegevens op.",
     privacyWhyTitle: "Waarvoor gebruiken wij jouw gegevens?",
-    privacyWhy: "Jouw contactgegevens worden uitsluitend gebruikt om jouw bericht door te sturen naar de aanbieder van de schoenen en om jou een bevestiging te sturen. Wij verkopen of delen jouw gegevens niet met derden voor marketingdoeleinden.",
+    privacyWhy:
+      "Jouw contactgegevens worden uitsluitend gebruikt om jouw bericht door te sturen naar de aanbieder van de schoenen en om jou een bevestiging te sturen. Wij verkopen of delen jouw gegevens niet met derden voor marketingdoeleinden.",
     privacyStorageTitle: "Hoe lang bewaren wij jouw gegevens?",
-    privacyStorage: "Contactberichten worden niet permanent opgeslagen door Voetbal-Ruil. Ze worden via e-mail verstuurd en daarna niet verder verwerkt of bewaard in onze systemen.",
+    privacyStorage:
+      "Contactberichten worden niet permanent opgeslagen door Voetbal-Ruil. Ze worden via e-mail verstuurd en daarna niet verder verwerkt of bewaard in onze systemen.",
     privacyRightsTitle: "Jouw rechten (AVG)",
-    privacyRightsText: "Op grond van de Algemene Verordening Gegevensbescherming (AVG) heb je het recht op inzage, correctie en verwijdering van jouw persoonsgegevens. Neem hiervoor contact met ons op via het contactformulier.",
+    privacyRightsText:
+      "Op grond van de Algemene Verordening Gegevensbescherming (AVG) heb je het recht op inzage, correctie en verwijdering van jouw persoonsgegevens. Neem hiervoor contact met ons op via het contactformulier.",
     privacyCookiesTitle: "Cookies",
-    privacyCookies: "Voetbal-Ruil maakt geen gebruik van tracking cookies of analytische cookies van derden. Er worden alleen functionele cookies gebruikt die strikt noodzakelijk zijn voor het functioneren van de website.",
+    privacyCookies:
+      "Voetbal-Ruil maakt geen gebruik van tracking cookies of analytische cookies van derden. Er worden alleen functionele cookies gebruikt die strikt noodzakelijk zijn voor het functioneren van de website.",
     privacyContactTitle: "Vragen?",
-    privacyContact: "Heb je vragen over het gebruik van jouw gegevens? Stuur ons een bericht via het contactformulier op de website.",
+    privacyContact:
+      "Heb je vragen over het gebruik van jouw gegevens? Stuur ons een bericht via het contactformulier op de website.",
     // Terms Modal
     termsServiceTitle: "Over deze dienst",
-    termsService: "Voetbal-Ruil is een gratis platform waar particulieren tweedehands kinder voetbalschoenen kunnen aanbieden en vinden. Voetbal-Ruil treedt niet op als koper, verkoper of tussenpersoon bij transacties tussen gebruikers.",
+    termsService:
+      "Voetbal-Ruil is een gratis platform waar particulieren tweedehands kinder voetbalschoenen kunnen aanbieden en vinden. Voetbal-Ruil treedt niet op als koper, verkoper of tussenpersoon bij transacties tussen gebruikers.",
     termsUsersTitle: "Gebruik van het platform",
-    termsUsers: "Het platform is uitsluitend bedoeld voor particulier gebruik. Je mag alleen advertenties plaatsen voor schoenen die je daadwerkelijk bezit. Het is niet toegestaan om misleidende, onjuiste of commerciële advertenties te plaatsen.",
+    termsUsers:
+      "Het platform is uitsluitend bedoeld voor particulier gebruik. Je mag alleen advertenties plaatsen voor schoenen die je daadwerkelijk bezit. Het is niet toegestaan om misleidende, onjuiste of commerciële advertenties te plaatsen.",
     termsListingsTitle: "Inhoud van advertenties",
-    termsListings: "Gebruikers zijn zelf verantwoordelijk voor de inhoud van hun advertentie, inclusief foto's en beschrijvingen. Voetbal-Ruil behoudt het recht om advertenties zonder opgaaf van reden te verwijderen.",
+    termsListings:
+      "Gebruikers zijn zelf verantwoordelijk voor de inhoud van hun advertentie, inclusief foto's en beschrijvingen. Voetbal-Ruil behoudt het recht om advertenties zonder opgaaf van reden te verwijderen.",
     termsLiabilityTitle: "Aansprakelijkheid",
-    termsLiability: "Voetbal-Ruil is niet aansprakelijk voor geschillen, schade of verliezen die voortvloeien uit contact of transacties tussen gebruikers. Ruilen of kopen doe je op eigen risico.",
+    termsLiability:
+      "Voetbal-Ruil is niet aansprakelijk voor geschillen, schade of verliezen die voortvloeien uit contact of transacties tussen gebruikers. Ruilen of kopen doe je op eigen risico.",
     termsContactTitle: "Contact tussen gebruikers",
-    termsContactText: "Berichten die via het platform worden verstuurd zijn bedoeld om contact te leggen. Voetbal-Ruil is geen partij in gesprekken en kan de inhoud van berichten niet garanderen of monitoren.",
+    termsContactText:
+      "Berichten die via het platform worden verstuurd zijn bedoeld om contact te leggen. Voetbal-Ruil is geen partij in gesprekken en kan de inhoud van berichten niet garanderen of monitoren.",
     termsChangesTitle: "Wijzigingen in de voorwaarden",
-    termsChanges: "Voetbal-Ruil behoudt het recht om deze voorwaarden op ieder moment te wijzigen. Voortgezet gebruik van het platform na een wijziging geldt als aanvaarding van de nieuwe voorwaarden.",
+    termsChanges:
+      "Voetbal-Ruil behoudt het recht om deze voorwaarden op ieder moment te wijzigen. Voortgezet gebruik van het platform na een wijziging geldt als aanvaarding van de nieuwe voorwaarden.",
     // Contact Section
     contactSectionTitle: "Neem Contact Op",
-    contactSectionSubtitle: "Heb je een vraag of opmerking? Stuur ons een bericht en we reageren zo snel mogelijk.",
+    contactSectionSubtitle:
+      "Heb je een vraag of opmerking? Stuur ons een bericht en we reageren zo snel mogelijk.",
     contactSectionSent: "Bedankt voor je bericht! We nemen zo snel mogelijk contact met je op.",
     generalMessagePlaceholder: "Jouw bericht...",
     // Errors
@@ -154,7 +170,8 @@ export const translations = {
     cancel: "Cancel",
     // About
     aboutTitle: "What is Voetbal-Ruil?",
-    aboutIntro: "Kids grow fast. Football shoes don't. Voetbal-Ruil is a free marketplace where parents can list or find quality second-hand football shoes — close to home, hassle-free.",
+    aboutIntro:
+      "Kids grow fast. Football shoes don't. Voetbal-Ruil is a free marketplace where parents can list or find quality second-hand football shoes — close to home, hassle-free.",
     aboutHowTitle: "How does it work?",
     aboutStep1Title: "Search by province",
     aboutStep1: "Browse available listings in your region.",
@@ -163,38 +180,53 @@ export const translations = {
     aboutStep3Title: "List your shoes",
     aboutStep3: "Click Upload and get your shoes online in under a minute.",
     aboutWhyTitle: "Why Voetbal-Ruil?",
-    aboutWhy: "New football shoes are expensive. Second-hand swapping is sustainable, affordable, and helps other football families. Together we keep kids on the pitch.",
+    aboutWhy:
+      "New football shoes are expensive. Second-hand swapping is sustainable, affordable, and helps other football families. Together we keep kids on the pitch.",
     // Privacy Modal
     privacyWhoTitle: "Who are we?",
-    privacyWho: "Voetbal-Ruil is a free online marketplace for second-hand children's football shoes, intended as a service for private individuals in the Netherlands.",
+    privacyWho:
+      "Voetbal-Ruil is a free online marketplace for second-hand children's football shoes, intended as a service for private individuals in the Netherlands.",
     privacyDataTitle: "What data do we process?",
-    privacyData: "We only process data that you actively provide: your name, email address, and the message you send via the contact form. We do not store passwords, payment details, or location data.",
+    privacyData:
+      "We only process data that you actively provide: your name, email address, and the message you send via the contact form. We do not store passwords, payment details, or location data.",
     privacyWhyTitle: "Why do we use your data?",
-    privacyWhy: "Your contact details are used solely to forward your message to the shoe listing owner and to send you a confirmation. We do not sell or share your data with third parties for marketing purposes.",
+    privacyWhy:
+      "Your contact details are used solely to forward your message to the shoe listing owner and to send you a confirmation. We do not sell or share your data with third parties for marketing purposes.",
     privacyStorageTitle: "How long do we retain your data?",
-    privacyStorage: "Contact messages are not permanently stored by Voetbal-Ruil. They are sent via email and not further processed or retained in our systems.",
+    privacyStorage:
+      "Contact messages are not permanently stored by Voetbal-Ruil. They are sent via email and not further processed or retained in our systems.",
     privacyRightsTitle: "Your rights (GDPR)",
-    privacyRightsText: "Under the General Data Protection Regulation (GDPR), you have the right to access, correct, and delete your personal data. Please contact us via the contact form on the website.",
+    privacyRightsText:
+      "Under the General Data Protection Regulation (GDPR), you have the right to access, correct, and delete your personal data. Please contact us via the contact form on the website.",
     privacyCookiesTitle: "Cookies",
-    privacyCookies: "Voetbal-Ruil does not use tracking or third-party analytics cookies. Only strictly necessary functional cookies are used to ensure the website operates correctly.",
+    privacyCookies:
+      "Voetbal-Ruil does not use tracking or third-party analytics cookies. Only strictly necessary functional cookies are used to ensure the website operates correctly.",
     privacyContactTitle: "Questions?",
-    privacyContact: "If you have questions about how your data is used, please send us a message via the contact form on the website.",
+    privacyContact:
+      "If you have questions about how your data is used, please send us a message via the contact form on the website.",
     // Terms Modal
     termsServiceTitle: "About this service",
-    termsService: "Voetbal-Ruil is a free platform where private individuals can list and find second-hand children's football shoes. Voetbal-Ruil does not act as buyer, seller, or intermediary in transactions between users.",
+    termsService:
+      "Voetbal-Ruil is a free platform where private individuals can list and find second-hand children's football shoes. Voetbal-Ruil does not act as buyer, seller, or intermediary in transactions between users.",
     termsUsersTitle: "Use of the platform",
-    termsUsers: "The platform is intended for private use only. You may only list shoes that you actually own. Misleading, inaccurate, or commercial listings are not permitted.",
+    termsUsers:
+      "The platform is intended for private use only. You may only list shoes that you actually own. Misleading, inaccurate, or commercial listings are not permitted.",
     termsListingsTitle: "Listing content",
-    termsListings: "Users are solely responsible for the content of their listings, including photos and descriptions. Voetbal-Ruil reserves the right to remove listings without giving reasons.",
+    termsListings:
+      "Users are solely responsible for the content of their listings, including photos and descriptions. Voetbal-Ruil reserves the right to remove listings without giving reasons.",
     termsLiabilityTitle: "Liability",
-    termsLiability: "Voetbal-Ruil is not liable for disputes, damages, or losses arising from contact or transactions between users. Any exchange or purchase is done at your own risk.",
+    termsLiability:
+      "Voetbal-Ruil is not liable for disputes, damages, or losses arising from contact or transactions between users. Any exchange or purchase is done at your own risk.",
     termsContactTitle: "Contact between users",
-    termsContactText: "Messages sent via the platform are intended to establish contact. Voetbal-Ruil is not a party to conversations and cannot guarantee or monitor the content of messages.",
+    termsContactText:
+      "Messages sent via the platform are intended to establish contact. Voetbal-Ruil is not a party to conversations and cannot guarantee or monitor the content of messages.",
     termsChangesTitle: "Changes to these terms",
-    termsChanges: "Voetbal-Ruil reserves the right to modify these terms at any time. Continued use of the platform after a change constitutes acceptance of the updated terms.",
+    termsChanges:
+      "Voetbal-Ruil reserves the right to modify these terms at any time. Continued use of the platform after a change constitutes acceptance of the updated terms.",
     // Contact Section
     contactSectionTitle: "Get in Touch",
-    contactSectionSubtitle: "Have a question or a comment? Send us a message and we'll get back to you as soon as possible.",
+    contactSectionSubtitle:
+      "Have a question or a comment? Send us a message and we'll get back to you as soon as possible.",
     contactSectionSent: "Thanks for your message! We'll get back to you as soon as possible.",
     generalMessagePlaceholder: "Your message...",
     // Errors
@@ -227,4 +259,3 @@ export const provinces = [
   "Zeeland",
   "Zuid-Holland",
 ]
-

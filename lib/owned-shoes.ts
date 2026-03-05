@@ -1,8 +1,8 @@
-const KEY = 'voetbalruil_owned_shoes'
+const KEY = "voetbalruil_owned_shoes"
 
 function load(): number[] {
   try {
-    return JSON.parse(localStorage.getItem(KEY) ?? '[]')
+    return JSON.parse(localStorage.getItem(KEY) ?? "[]") as number[]
   } catch {
     return []
   }

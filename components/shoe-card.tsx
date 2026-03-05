@@ -1,10 +1,8 @@
 "use client"
 
-import { MapPin, Pencil, Trash2 } from "lucide-react"
 import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { MapPin, Pencil, Trash2 } from "lucide-react"
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,6 +14,9 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
 import { useLanguage } from "@/lib/language-context"
 import { isOwnedShoe } from "@/lib/owned-shoes"
 
@@ -44,14 +45,17 @@ export function ShoeCard({ shoe, onContactClick, onEditClick, onDeleteClick }: S
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
     >
-      <Card className="group overflow-hidden border-border bg-card py-0 transition-shadow hover:shadow-lg">
+      <Card className="group border-border bg-card overflow-hidden py-0 transition-shadow hover:shadow-lg">
         <div className="relative aspect-[4/3] overflow-hidden">
           <img
             src={shoe.image ?? "/placeholder.jpg"}
             alt={shoe.title}
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
-          <Badge key={shoe.size} className="absolute top-3 right-3 bg-[#0A3038]/80 text-[#E8F0F2] backdrop-blur-sm hover:bg-[#0A3038]/90">
+          <Badge
+            key={shoe.size}
+            className="absolute top-3 right-3 bg-[#0A3038]/80 text-[#E8F0F2] backdrop-blur-sm hover:bg-[#0A3038]/90"
+          >
             {t.size} {shoe.size}
           </Badge>
           {isOwned && (
@@ -66,7 +70,7 @@ export function ShoeCard({ shoe, onContactClick, onEditClick, onDeleteClick }: S
               <AlertDialog>
                 <AlertDialogTrigger asChild>
                   <button
-                    className="flex size-7 items-center justify-center rounded-md bg-white/90 text-destructive shadow transition-colors hover:bg-white"
+                    className="text-destructive flex size-7 items-center justify-center rounded-md bg-white/90 shadow transition-colors hover:bg-white"
                     aria-label={t.delete}
                   >
                     <Trash2 className="size-3.5" />
@@ -92,10 +96,10 @@ export function ShoeCard({ shoe, onContactClick, onEditClick, onDeleteClick }: S
           )}
         </div>
         <CardContent className="flex flex-col gap-3 p-4">
-          <h3 className="text-balance font-mono text-sm font-semibold text-card-foreground">
+          <h3 className="text-card-foreground font-mono text-sm font-semibold text-balance">
             {shoe.title}
           </h3>
-          <div className="flex items-center gap-1.5 text-muted-foreground">
+          <div className="text-muted-foreground flex items-center gap-1.5">
             <MapPin className="size-3.5" />
             <span className="text-xs">
               {t.province}: {shoe.province}
@@ -105,7 +109,7 @@ export function ShoeCard({ shoe, onContactClick, onEditClick, onDeleteClick }: S
             onClick={onContactClick}
             variant="outline"
             size="sm"
-            className="mt-1 w-full border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground"
+            className="border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground mt-1 w-full"
           >
             {t.contact}
           </Button>

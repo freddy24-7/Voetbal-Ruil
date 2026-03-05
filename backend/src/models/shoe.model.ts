@@ -1,34 +1,34 @@
-import {Entity, model, property} from '@loopback/repository'
+import { Entity, model, property } from "@loopback/repository"
 
-@model({settings: {mysql: {table: 'shoe'}}})
+@model({ settings: { mysql: { table: "shoe" } } })
 export class Shoe extends Entity {
   @property({
-    type: 'number',
+    type: "number",
     id: true,
     generated: true,
   })
   id?: number
 
   @property({
-    type: 'string',
+    type: "string",
     required: true,
   })
   title!: string
 
   @property({
-    type: 'string',
+    type: "string",
     required: true,
   })
   size!: string
 
   @property({
-    type: 'string',
+    type: "string",
     required: true,
   })
   province!: string
 
   @property({
-    type: 'string',
+    type: "string",
   })
   image?: string
 

@@ -1,16 +1,17 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { LanguageProvider, useLanguage } from "@/lib/language-context"
-import { SiteHeader } from "@/components/site-header"
-import { HeroSection } from "@/components/hero-section"
+import { useState, useEffect, useCallback } from "react"
+
 import { AboutSection } from "@/components/about-section"
-import { ShoeGrid } from "@/components/shoe-grid"
 import { ContactModal } from "@/components/contact-modal"
-import { UploadModal } from "@/components/upload-modal"
 import { EditShoeModal } from "@/components/edit-shoe-modal"
+import { HeroSection } from "@/components/hero-section"
+import { ShoeGrid } from "@/components/shoe-grid"
 import { SiteFooter } from "@/components/site-footer"
+import { SiteHeader } from "@/components/site-header"
+import { UploadModal } from "@/components/upload-modal"
 import { fetchShoes, deleteShoe } from "@/lib/api"
+import { LanguageProvider, useLanguage } from "@/lib/language-context"
 import { removeOwnedShoe } from "@/lib/owned-shoes"
 import type { Shoe } from "@/lib/types"
 
@@ -25,16 +26,18 @@ function VoetbalRuilApp() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const loadShoes = () => {
+  const loadShoes = useCallback(() => {
     setLoading(true)
     setError(null)
     fetchShoes(selectedProvince)
       .then(setShoes)
       .catch(() => setError(t.errorLoadShoes))
       .finally(() => setLoading(false))
-  }
+  }, [selectedProvince, t.errorLoadShoes])
 
-  useEffect(() => { loadShoes() }, [selectedProvince])
+  useEffect(() => {
+    loadShoes()
+  }, [loadShoes])
 
   const handleContactClick = (shoe: Shoe) => {
     setSelectedShoe(shoe)
@@ -53,14 +56,11 @@ function VoetbalRuilApp() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="bg-background flex min-h-screen flex-col">
       <SiteHeader onUploadClick={() => setUploadOpen(true)} />
 
       <main className="flex-1">
-        <HeroSection
-          selectedProvince={selectedProvince}
-          onProvinceChange={setSelectedProvince}
-        />
+        <HeroSection selectedProvince={selectedProvince} onProvinceChange={setSelectedProvince} />
         <AboutSection />
         <ShoeGrid
           shoes={shoes}
@@ -69,7 +69,7 @@ function VoetbalRuilApp() {
           selectedProvince={selectedProvince}
           onContactClick={handleContactClick}
           onEditClick={handleEditClick}
-          onDeleteClick={handleDeleteClick}
+          onDeleteClick={(shoe) => void handleDeleteClick(shoe)}
         />
       </main>
 

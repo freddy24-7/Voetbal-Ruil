@@ -1,5 +1,6 @@
-import { ThemeProvider } from 'next-themes'
-import Page from '@/app/page'
+import { ThemeProvider } from "next-themes"
+
+import Page from "@/app/page"
 
 function App() {
   return (
@@ -10,4 +11,3 @@ function App() {
 }
 
 export default App
-

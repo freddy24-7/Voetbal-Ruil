@@ -1,15 +1,15 @@
-import type { Shoe } from './types'
+import type { Shoe } from "./types"
 
-const API_URL = 'http://localhost:3001'
+const API_URL = "http://localhost:3001"
 
 export async function fetchShoes(province?: string): Promise<Shoe[]> {
   const url =
-    province && province !== 'all'
+    province && province !== "all"
       ? `${API_URL}/shoes?province=${encodeURIComponent(province)}`
       : `${API_URL}/shoes`
   const res = await fetch(url)
-  if (!res.ok) throw new Error('Failed to fetch shoes')
-  return res.json()
+  if (!res.ok) throw new Error("Failed to fetch shoes")
+  return res.json() as Promise<Shoe[]>
 }
 
 export async function createShoe(data: {
@@ -19,40 +19,43 @@ export async function createShoe(data: {
   image?: string
 }): Promise<Shoe> {
   const res = await fetch(`${API_URL}/shoes`, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   })
-  if (!res.ok) throw new Error('Failed to create shoe')
-  return res.json()
+  if (!res.ok) throw new Error("Failed to create shoe")
+  return res.json() as Promise<Shoe>
 }
 
 export async function uploadImage(file: File): Promise<string> {
   const form = new FormData()
-  form.append('file', file)
-  const res = await fetch(`${API_URL}/upload`, {method: 'POST', body: form})
-  if (!res.ok) throw new Error('Failed to upload image')
-  const data = await res.json()
+  form.append("file", file)
+  const res = await fetch(`${API_URL}/upload`, { method: "POST", body: form })
+  if (!res.ok) throw new Error("Failed to upload image")
+  const data = (await res.json()) as { url: string }
   return data.url
 }
 
-export async function updateShoe(id: number, data: {
-  title: string
-  size: string
-  province: string
-  image?: string
-}): Promise<void> {
+export async function updateShoe(
+  id: number,
+  data: {
+    title: string
+    size: string
+    province: string
+    image?: string
+  }
+): Promise<void> {
   const res = await fetch(`${API_URL}/shoes/${id}`, {
-    method: 'PUT',
-    headers: {'Content-Type': 'application/json'},
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   })
-  if (!res.ok) throw new Error('Failed to update shoe')
+  if (!res.ok) throw new Error("Failed to update shoe")
 }
 
 export async function deleteShoe(id: number): Promise<void> {
-  const res = await fetch(`${API_URL}/shoes/${id}`, {method: 'DELETE'})
-  if (!res.ok) throw new Error('Failed to delete shoe')
+  const res = await fetch(`${API_URL}/shoes/${id}`, { method: "DELETE" })
+  if (!res.ok) throw new Error("Failed to delete shoe")
 }
 
 export async function sendGeneralContact(data: {
@@ -61,11 +64,11 @@ export async function sendGeneralContact(data: {
   message: string
 }): Promise<void> {
   const res = await fetch(`${API_URL}/contact`, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   })
-  if (!res.ok) throw new Error('Failed to send message')
+  if (!res.ok) throw new Error("Failed to send message")
 }
 
 export async function createContact(data: {
@@ -76,9 +79,9 @@ export async function createContact(data: {
   shoeTitle: string
 }): Promise<void> {
   const res = await fetch(`${API_URL}/contacts`, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   })
-  if (!res.ok) throw new Error('Failed to send message')
+  if (!res.ok) throw new Error("Failed to send message")
 }

@@ -1,8 +1,7 @@
 "use client"
 
 import { Search } from "lucide-react"
-import { useLanguage } from "@/lib/language-context"
-import { provinces } from "@/lib/translations"
+
 import {
   Select,
   SelectContent,
@@ -10,6 +9,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { useLanguage } from "@/lib/language-context"
+import { provinces } from "@/lib/translations"
 
 export function HeroSection({
   selectedProvince,
@@ -34,10 +35,10 @@ export function HeroSection({
       </div>
 
       <div className="relative mx-auto max-w-4xl px-4 text-center">
-        <h1 className="text-balance font-mono text-4xl font-bold tracking-tight text-[#FFFFFF] md:text-5xl lg:text-6xl">
+        <h1 className="font-mono text-4xl font-bold tracking-tight text-balance text-[#FFFFFF] md:text-5xl lg:text-6xl">
           {t.heroTitle}
         </h1>
-        <p className="mx-auto mt-4 max-w-2xl text-pretty text-lg text-[#C8DEFF] md:text-xl">
+        <p className="mx-auto mt-4 max-w-2xl text-lg text-pretty text-[#C8DEFF] md:text-xl">
           {t.heroSubtitle}
         </p>
 
