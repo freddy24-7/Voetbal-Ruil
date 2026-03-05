@@ -38,6 +38,15 @@ export const translations = {
     dropzoneText: "Sleep je foto hierheen of klik om te uploaden",
     dropzoneHint: "PNG, JPG tot 5MB",
     uploadButton: "Plaatsen",
+    // Edit / Delete
+    edit: "Bewerken",
+    editTitle: "Advertentie bewerken",
+    editButton: "Opslaan",
+    delete: "Verwijderen",
+    deleteConfirmTitle: "Advertentie verwijderen?",
+    deleteConfirmDescription: "Deze actie kan niet ongedaan worden gemaakt.",
+    deleteConfirm: "Ja, verwijderen",
+    cancel: "Annuleren",
     // About
     aboutTitle: "Wat is Voetbal-Ruil?",
     aboutIntro: "Kinderen groeien snel. Voetbalschoenen niet mee. Voetbal-Ruil is een gratis marktplaats waar ouders tweedehands voetbalschoenen van goede kwaliteit kunnen aanbieden of vinden — dicht bij huis, zonder gedoe.",
@@ -125,6 +134,15 @@ export const translations = {
     dropzoneText: "Drag your photo here or click to upload",
     dropzoneHint: "PNG, JPG up to 5MB",
     uploadButton: "Submit",
+    // Edit / Delete
+    edit: "Edit",
+    editTitle: "Edit listing",
+    editButton: "Save",
+    delete: "Delete",
+    deleteConfirmTitle: "Delete listing?",
+    deleteConfirmDescription: "This action cannot be undone.",
+    deleteConfirm: "Yes, delete",
+    cancel: "Cancel",
     // About
     aboutTitle: "What is Voetbal-Ruil?",
     aboutIntro: "Kids grow fast. Football shoes don't. Voetbal-Ruil is a free marketplace where parents can list or find quality second-hand football shoes — close to home, hassle-free.",

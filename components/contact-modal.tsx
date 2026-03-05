@@ -48,7 +48,7 @@ export function ContactModal({ open, onOpenChange, shoeId, shoeTitle }: ContactM
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault()
-    if (!shoeId || !shoeTitle) return
+    if (shoeId === undefined || !shoeTitle) return
     setSubmitting(true)
     setError(null)
     try {

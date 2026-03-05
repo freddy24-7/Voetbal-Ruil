@@ -8,14 +8,17 @@ import { AboutSection } from "@/components/about-section"
 import { ShoeGrid } from "@/components/shoe-grid"
 import { ContactModal } from "@/components/contact-modal"
 import { UploadModal } from "@/components/upload-modal"
+import { EditShoeModal } from "@/components/edit-shoe-modal"
 import { SiteFooter } from "@/components/site-footer"
-import { fetchShoes } from "@/lib/api"
+import { fetchShoes, deleteShoe } from "@/lib/api"
+import { removeOwnedShoe } from "@/lib/owned-shoes"
 import type { Shoe } from "@/lib/types"
 
 function VoetbalRuilApp() {
   const [selectedProvince, setSelectedProvince] = useState("all")
   const [contactOpen, setContactOpen] = useState(false)
   const [uploadOpen, setUploadOpen] = useState(false)
+  const [editOpen, setEditOpen] = useState(false)
   const [selectedShoe, setSelectedShoe] = useState<Shoe | null>(null)
   const [shoes, setShoes] = useState<Shoe[]>([])
   const [loading, setLoading] = useState(true)
@@ -37,6 +40,17 @@ function VoetbalRuilApp() {
     setContactOpen(true)
   }
 
+  const handleEditClick = (shoe: Shoe) => {
+    setSelectedShoe(shoe)
+    setEditOpen(true)
+  }
+
+  const handleDeleteClick = async (shoe: Shoe) => {
+    await deleteShoe(shoe.id)
+    removeOwnedShoe(shoe.id)
+    loadShoes()
+  }
+
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <SiteHeader onUploadClick={() => setUploadOpen(true)} />
@@ -53,6 +67,8 @@ function VoetbalRuilApp() {
           error={error}
           selectedProvince={selectedProvince}
           onContactClick={handleContactClick}
+          onEditClick={handleEditClick}
+          onDeleteClick={handleDeleteClick}
         />
       </main>
 
@@ -65,6 +81,12 @@ function VoetbalRuilApp() {
         shoeTitle={selectedShoe?.title}
       />
       <UploadModal open={uploadOpen} onOpenChange={setUploadOpen} onSuccess={loadShoes} />
+      <EditShoeModal
+        open={editOpen}
+        onOpenChange={setEditOpen}
+        shoe={selectedShoe}
+        onSuccess={loadShoes}
+      />
     </div>
   )
 }

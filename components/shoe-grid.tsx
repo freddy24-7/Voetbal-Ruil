@@ -12,12 +12,16 @@ export function ShoeGrid({
   error,
   selectedProvince,
   onContactClick,
+  onEditClick,
+  onDeleteClick,
 }: {
   shoes: Shoe[]
   loading: boolean
   error: string | null
   selectedProvince: string
   onContactClick: (shoe: Shoe) => void
+  onEditClick: (shoe: Shoe) => void
+  onDeleteClick: (shoe: Shoe) => void
 }) {
   const { t } = useLanguage()
 
@@ -52,6 +56,8 @@ export function ShoeGrid({
                 key={shoe.id}
                 shoe={shoe}
                 onContactClick={() => onContactClick(shoe)}
+                onEditClick={() => onEditClick(shoe)}
+                onDeleteClick={() => onDeleteClick(shoe)}
               />
             ))}
           </AnimatePresence>

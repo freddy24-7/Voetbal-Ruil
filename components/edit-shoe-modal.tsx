@@ -1,9 +1,8 @@
 "use client"
 
-import { useCallback, useState } from "react"
-import { ImagePlus, Upload, Loader2 } from "lucide-react"
-import { createShoe, uploadImage } from "@/lib/api"
-import { addOwnedShoe } from "@/lib/owned-shoes"
+import { useCallback, useEffect, useState } from "react"
+import { ImagePlus, Loader2, Save } from "lucide-react"
+import { updateShoe, uploadImage } from "@/lib/api"
 import {
   Dialog,
   DialogContent,
@@ -24,32 +23,41 @@ import {
 } from "@/components/ui/select"
 import { useLanguage } from "@/lib/language-context"
 import { provinces } from "@/lib/translations"
+import type { Shoe } from "@/lib/types"
 
-type UploadModalProps = {
+type Props = {
   open: boolean
   onOpenChange: (open: boolean) => void
-  onSuccess?: () => void
+  shoe: Shoe | null
+  onSuccess: () => void
 }
 
-export function UploadModal({ open, onOpenChange, onSuccess }: UploadModalProps) {
+export function EditShoeModal({ open, onOpenChange, shoe, onSuccess }: Props) {
   const { t } = useLanguage()
-  const [dragActive, setDragActive] = useState(false)
-  const [file, setFile] = useState<File | null>(null)
-  const [fileName, setFileName] = useState<string | null>(null)
   const [title, setTitle] = useState("")
   const [size, setSize] = useState("")
   const [province, setProvince] = useState("")
+  const [file, setFile] = useState<File | null>(null)
+  const [fileName, setFileName] = useState<string | null>(null)
+  const [dragActive, setDragActive] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (shoe) {
+      setTitle(shoe.title)
+      setSize(shoe.size)
+      setProvince(shoe.province)
+      setFile(null)
+      setFileName(null)
+      setError(null)
+    }
+  }, [shoe])
 
   const handleDrag = useCallback((e: React.DragEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    if (e.type === "dragenter" || e.type === "dragover") {
-      setDragActive(true)
-    } else if (e.type === "dragleave") {
-      setDragActive(false)
-    }
+    setDragActive(e.type === "dragenter" || e.type === "dragover")
   }, [])
 
   const handleDrop = useCallback((e: React.DragEvent) => {
@@ -57,73 +65,44 @@ export function UploadModal({ open, onOpenChange, onSuccess }: UploadModalProps)
     e.stopPropagation()
     setDragActive(false)
     const picked = e.dataTransfer.files?.[0]
-    if (picked) {
-      setFile(picked)
-      setFileName(picked.name)
-    }
+    if (picked) { setFile(picked); setFileName(picked.name) }
   }, [])
 
-  const handleFileChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const picked = e.target.files?.[0]
-      if (picked) {
-        setFile(picked)
-        setFileName(picked.name)
-      }
-    },
-    []
-  )
-
-  const reset = () => {
-    setTitle("")
-    setSize("")
-    setProvince("")
-    setFile(null)
-    setFileName(null)
-    setDragActive(false)
-    setError(null)
-  }
+  const handleFileChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const picked = e.target.files?.[0]
+    if (picked) { setFile(picked); setFileName(picked.name) }
+  }, [])
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault()
+    if (!shoe) return
     setSubmitting(true)
     setError(null)
     try {
-      let imageUrl: string | undefined
-      if (file) {
-        imageUrl = await uploadImage(file)
-      }
-      const shoe = await createShoe({title, size, province, image: imageUrl})
-      addOwnedShoe(shoe.id)
-      reset()
+      let image = shoe.image
+      if (file) image = await uploadImage(file)
+      await updateShoe(shoe.id, { title, size, province, image })
       onOpenChange(false)
-      onSuccess?.()
+      onSuccess()
     } catch {
-      setError("Failed to submit. Please try again.")
+      setError("Failed to save changes. Please try again.")
     } finally {
       setSubmitting(false)
     }
   }
 
   return (
-    <Dialog
-      open={open}
-      onOpenChange={(isOpen) => {
-        if (!isOpen) reset()
-        onOpenChange(isOpen)
-      }}
-    >
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
-          <DialogTitle className="font-mono">{t.uploadTitle}</DialogTitle>
-          <DialogDescription>{t.uploadDescription}</DialogDescription>
+          <DialogTitle className="font-mono">{t.editTitle}</DialogTitle>
+          <DialogDescription>{shoe?.title}</DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
-            <Label htmlFor="upload-title">{t.title}</Label>
+            <Label htmlFor="edit-title">{t.title}</Label>
             <Input
-              id="upload-title"
-              placeholder={t.titlePlaceholder}
+              id="edit-title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
@@ -132,10 +111,9 @@ export function UploadModal({ open, onOpenChange, onSuccess }: UploadModalProps)
 
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-2">
-              <Label htmlFor="upload-size">{t.size}</Label>
+              <Label htmlFor="edit-size">{t.size}</Label>
               <Input
-                id="upload-size"
-                placeholder={t.sizePlaceholder}
+                id="edit-size"
                 value={size}
                 onChange={(e) => setSize(e.target.value)}
                 required
@@ -143,15 +121,13 @@ export function UploadModal({ open, onOpenChange, onSuccess }: UploadModalProps)
             </div>
             <div className="flex flex-col gap-2">
               <Label>{t.province}</Label>
-              <Select value={province} onValueChange={setProvince} required>
+              <Select value={province} onValueChange={setProvince}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder={t.selectProvince} />
                 </SelectTrigger>
                 <SelectContent>
                   {provinces.map((p) => (
-                    <SelectItem key={p} value={p}>
-                      {p}
-                    </SelectItem>
+                    <SelectItem key={p} value={p}>{p}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -161,31 +137,25 @@ export function UploadModal({ open, onOpenChange, onSuccess }: UploadModalProps)
           <div className="flex flex-col gap-2">
             <Label>{t.photo}</Label>
             <label
-              htmlFor="upload-file"
+              htmlFor="edit-file"
               onDragEnter={handleDrag}
               onDragLeave={handleDrag}
               onDragOver={handleDrag}
               onDrop={handleDrop}
-              className={`flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed px-6 py-8 text-center transition-colors ${
+              className={`flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed px-6 py-6 text-center transition-colors ${
                 dragActive
                   ? "border-primary bg-primary/5"
                   : "border-border hover:border-primary/50 hover:bg-muted/50"
               }`}
             >
+              <ImagePlus className="mb-2 size-7 text-muted-foreground" />
               {fileName ? (
-                <>
-                  <ImagePlus className="mb-2 size-8 text-primary" />
-                  <p className="text-sm font-medium text-foreground">{fileName}</p>
-                </>
+                <p className="text-sm font-medium text-foreground">{fileName}</p>
               ) : (
-                <>
-                  <ImagePlus className="mb-2 size-8 text-muted-foreground" />
-                  <p className="text-sm font-medium text-foreground">{t.dropzoneText}</p>
-                  <p className="mt-1 text-xs text-muted-foreground">{t.dropzoneHint}</p>
-                </>
+                <p className="text-sm text-muted-foreground">{t.dropzoneText}</p>
               )}
               <input
-                id="upload-file"
+                id="edit-file"
                 type="file"
                 accept="image/png,image/jpeg"
                 className="sr-only"
@@ -202,12 +172,8 @@ export function UploadModal({ open, onOpenChange, onSuccess }: UploadModalProps)
               disabled={submitting || !title || !size || !province}
               className="w-full bg-gradient-to-r from-[#1A59FC] to-[#0C90FF] text-[#FFFFFF] hover:from-[#1550E0] hover:to-[#0A80E8] sm:w-auto"
             >
-              {submitting ? (
-                <Loader2 className="size-4 animate-spin" />
-              ) : (
-                <Upload className="size-4" />
-              )}
-              {t.uploadButton}
+              {submitting ? <Loader2 className="size-4 animate-spin" /> : <Save className="size-4" />}
+              {t.editButton}
             </Button>
           </DialogFooter>
         </form>

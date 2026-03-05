@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
-    "@loopback/core": "^6.0.0",
+    "@loopback/core": "^7.0.0",
     "@loopback/repository": "^8.0.9",
     "@loopback/rest": "^14.0.0",
     "@radix-ui/react-accordion": "1.2.12",

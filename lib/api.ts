@@ -36,6 +36,25 @@ export async function uploadImage(file: File): Promise<string> {
   return data.url
 }
 
+export async function updateShoe(id: number, data: {
+  title: string
+  size: string
+  province: string
+  image?: string
+}): Promise<void> {
+  const res = await fetch(`${API_URL}/shoes/${id}`, {
+    method: 'PUT',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(data),
+  })
+  if (!res.ok) throw new Error('Failed to update shoe')
+}
+
+export async function deleteShoe(id: number): Promise<void> {
+  const res = await fetch(`${API_URL}/shoes/${id}`, {method: 'DELETE'})
+  if (!res.ok) throw new Error('Failed to delete shoe')
+}
+
 export async function sendGeneralContact(data: {
   name: string
   email: string
