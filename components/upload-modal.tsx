@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from "react"
 import { ImagePlus, Upload, Loader2 } from "lucide-react"
-import { createShoe } from "@/lib/api"
+import { createShoe, uploadImage } from "@/lib/api"
 import {
   Dialog,
   DialogContent,
@@ -33,6 +33,7 @@ type UploadModalProps = {
 export function UploadModal({ open, onOpenChange, onSuccess }: UploadModalProps) {
   const { t } = useLanguage()
   const [dragActive, setDragActive] = useState(false)
+  const [file, setFile] = useState<File | null>(null)
   const [fileName, setFileName] = useState<string | null>(null)
   const [title, setTitle] = useState("")
   const [size, setSize] = useState("")
@@ -54,15 +55,19 @@ export function UploadModal({ open, onOpenChange, onSuccess }: UploadModalProps)
     e.preventDefault()
     e.stopPropagation()
     setDragActive(false)
-    if (e.dataTransfer.files?.[0]) {
-      setFileName(e.dataTransfer.files[0].name)
+    const picked = e.dataTransfer.files?.[0]
+    if (picked) {
+      setFile(picked)
+      setFileName(picked.name)
     }
   }, [])
 
   const handleFileChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (e.target.files?.[0]) {
-        setFileName(e.target.files[0].name)
+      const picked = e.target.files?.[0]
+      if (picked) {
+        setFile(picked)
+        setFileName(picked.name)
       }
     },
     []
@@ -72,6 +77,7 @@ export function UploadModal({ open, onOpenChange, onSuccess }: UploadModalProps)
     setTitle("")
     setSize("")
     setProvince("")
+    setFile(null)
     setFileName(null)
     setDragActive(false)
     setError(null)
@@ -82,7 +88,11 @@ export function UploadModal({ open, onOpenChange, onSuccess }: UploadModalProps)
     setSubmitting(true)
     setError(null)
     try {
-      await createShoe({title, size, province})
+      let imageUrl: string | undefined
+      if (file) {
+        imageUrl = await uploadImage(file)
+      }
+      await createShoe({title, size, province, image: imageUrl})
       reset()
       onOpenChange(false)
       onSuccess?.()

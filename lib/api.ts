@@ -16,6 +16,7 @@ export async function createShoe(data: {
   title: string
   size: string
   province: string
+  image?: string
 }): Promise<Shoe> {
   const res = await fetch(`${API_URL}/shoes`, {
     method: 'POST',
@@ -24,6 +25,15 @@ export async function createShoe(data: {
   })
   if (!res.ok) throw new Error('Failed to create shoe')
   return res.json()
+}
+
+export async function uploadImage(file: File): Promise<string> {
+  const form = new FormData()
+  form.append('file', file)
+  const res = await fetch(`${API_URL}/upload`, {method: 'POST', body: form})
+  if (!res.ok) throw new Error('Failed to upload image')
+  const data = await res.json()
+  return data.url
 }
 
 export async function createContact(data: {

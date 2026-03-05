@@ -5,6 +5,7 @@ const repository_1 = require("@loopback/repository");
 const rest_1 = require("@loopback/rest");
 const contact_controller_1 = require("./controllers/contact.controller");
 const shoe_controller_1 = require("./controllers/shoe.controller");
+const upload_controller_1 = require("./controllers/upload.controller");
 const mysql_datasource_1 = require("./datasources/mysql.datasource");
 const shoe_repository_1 = require("./repositories/shoe.repository");
 class BackendApplication extends (0, repository_1.RepositoryMixin)(rest_1.RestApplication) {
@@ -14,6 +15,7 @@ class BackendApplication extends (0, repository_1.RepositoryMixin)(rest_1.RestAp
         this.repository(shoe_repository_1.ShoeRepository);
         this.controller(shoe_controller_1.ShoeController);
         this.controller(contact_controller_1.ContactController);
+        this.controller(upload_controller_1.UploadController);
     }
 }
 exports.BackendApplication = BackendApplication;
