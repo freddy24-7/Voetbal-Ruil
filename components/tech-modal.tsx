@@ -104,7 +104,7 @@ export function TechModal({ open, onOpenChange }: Props) {
       <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-2xl">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 font-mono">
-            <Code2 className="text-orange-500 size-5" />
+            <Code2 className="size-5 text-orange-500" />
             Tech &amp; Demo
           </DialogTitle>
         </DialogHeader>
@@ -117,8 +117,8 @@ export function TechModal({ open, onOpenChange }: Props) {
               <strong className="text-foreground">React</strong>,{" "}
               <strong className="text-foreground">LoopBack 4</strong>, and{" "}
               <strong className="text-foreground">TypeScript</strong> — end to end. It demonstrates
-              real-world patterns like bilingual UI, drag-and-drop image upload, accessibility,
-              dark mode, and a REST API backed by a relational database.
+              real-world patterns like bilingual UI, drag-and-drop image upload, accessibility, dark
+              mode, and a REST API backed by a relational database.
             </p>
             <p className="text-muted-foreground mt-2 leading-relaxed">
               Feel free to try it out: add a shoe listing, browse by province, and send a contact

@@ -151,10 +151,7 @@ export function SiteHeader({
             <Moon className="absolute size-4 scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
             <span className="sr-only">{t.toggleTheme}</span>
           </Button>
-          <Button
-            onClick={onTechClick}
-            className="bg-orange-500 text-white hover:bg-orange-600"
-          >
+          <Button onClick={onTechClick} className="bg-orange-500 text-white hover:bg-orange-600">
             <Code2 className="size-4" />
             Tech
           </Button>

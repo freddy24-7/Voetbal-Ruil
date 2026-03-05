@@ -17,27 +17,27 @@ A bilingual (Dutch/English) marketplace for trading second-hand children's footb
 
 ### Frontend
 
-| Technology | Purpose |
-|---|---|
-| [React 19](https://react.dev) | UI framework |
-| [Vite 6](https://vitejs.dev) | Build tool & dev server (SWC compiler) |
-| [TypeScript 5.7](https://www.typescriptlang.org) | Type safety |
-| [Tailwind CSS 4](https://tailwindcss.com) | Utility-first styling |
-| [shadcn/ui](https://ui.shadcn.com) + [Radix UI](https://www.radix-ui.com) | Accessible component primitives |
-| [Lucide React](https://lucide.dev) | Icon library |
-| [next-themes](https://github.com/pacocoursey/next-themes) | Dark/light mode |
-| [Framer Motion](https://www.framer.com/motion/) | Animations |
+| Technology                                                                | Purpose                                |
+| ------------------------------------------------------------------------- | -------------------------------------- |
+| [React 19](https://react.dev)                                             | UI framework                           |
+| [Vite 6](https://vitejs.dev)                                              | Build tool & dev server (SWC compiler) |
+| [TypeScript 5.7](https://www.typescriptlang.org)                          | Type safety                            |
+| [Tailwind CSS 4](https://tailwindcss.com)                                 | Utility-first styling                  |
+| [shadcn/ui](https://ui.shadcn.com) + [Radix UI](https://www.radix-ui.com) | Accessible component primitives        |
+| [Lucide React](https://lucide.dev)                                        | Icon library                           |
+| [next-themes](https://github.com/pacocoursey/next-themes)                 | Dark/light mode                        |
+| [Framer Motion](https://www.framer.com/motion/)                           | Animations                             |
 
 ### Backend
 
-| Technology | Purpose |
-|---|---|
-| [LoopBack 4](https://loopback.io) | REST API framework |
-| [Node.js ≥ 20](https://nodejs.org) | Runtime |
-| [MySQL 2](https://github.com/sidorares/node-mysql2) | Database driver |
-| [Multer](https://github.com/expressjs/multer) | Multipart file upload |
-| [Cloudinary](https://cloudinary.com) | Image hosting |
-| [Resend](https://resend.com) | Transactional email |
+| Technology                                          | Purpose               |
+| --------------------------------------------------- | --------------------- |
+| [LoopBack 4](https://loopback.io)                   | REST API framework    |
+| [Node.js ≥ 20](https://nodejs.org)                  | Runtime               |
+| [MySQL 2](https://github.com/sidorares/node-mysql2) | Database driver       |
+| [Multer](https://github.com/expressjs/multer)       | Multipart file upload |
+| [Cloudinary](https://cloudinary.com)                | Image hosting         |
+| [Resend](https://resend.com)                        | Transactional email   |
 
 ### Tooling
 
@@ -84,16 +84,16 @@ voetbal-ruil/
 
 ## API Endpoints
 
-| Method | Path | Description |
-|---|---|---|
-| `GET` | `/shoes` | List all shoes (optional `?province=` filter) |
-| `GET` | `/shoes/:id` | Get a single shoe |
-| `POST` | `/shoes` | Create a new listing |
-| `PUT` | `/shoes/:id` | Update a listing |
-| `DELETE` | `/shoes/:id` | Delete a listing |
-| `POST` | `/upload` | Upload a shoe photo (returns Cloudinary URL) |
-| `POST` | `/contacts` | Send a message to a seller |
-| `POST` | `/contact` | Send a general contact message |
+| Method   | Path         | Description                                   |
+| -------- | ------------ | --------------------------------------------- |
+| `GET`    | `/shoes`     | List all shoes (optional `?province=` filter) |
+| `GET`    | `/shoes/:id` | Get a single shoe                             |
+| `POST`   | `/shoes`     | Create a new listing                          |
+| `PUT`    | `/shoes/:id` | Update a listing                              |
+| `DELETE` | `/shoes/:id` | Delete a listing                              |
+| `POST`   | `/upload`    | Upload a shoe photo (returns Cloudinary URL)  |
+| `POST`   | `/contacts`  | Send a message to a seller                    |
+| `POST`   | `/contact`   | Send a general contact message                |
 
 ## Getting Started
 

@@ -1,11 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it } from "vitest"
 
-import {
-  addOwnedShoe,
-  getOwnedShoes,
-  isOwnedShoe,
-  removeOwnedShoe,
-} from "@/lib/owned-shoes"
+import { addOwnedShoe, getOwnedShoes, isOwnedShoe, removeOwnedShoe } from "@/lib/owned-shoes"
 
 describe("owned-shoes", () => {
   beforeEach(() => localStorage.clear())

@@ -28,9 +28,7 @@ describe("ShoeGrid — loading state", () => {
 
 describe("ShoeGrid — error state", () => {
   it("displays the error message", () => {
-    renderWithProviders(
-      <ShoeGrid {...defaultProps} shoes={[]} error="Kon schoenen niet laden" />
-    )
+    renderWithProviders(<ShoeGrid {...defaultProps} shoes={[]} error="Kon schoenen niet laden" />)
     expect(screen.getByText("Kon schoenen niet laden")).toBeInTheDocument()
   })
 })
@@ -50,9 +48,7 @@ describe("ShoeGrid — shoes list", () => {
   })
 
   it("shows the province filter label in the heading when a province is selected", () => {
-    renderWithProviders(
-      <ShoeGrid {...defaultProps} shoes={mockShoes} selectedProvince="Utrecht" />
-    )
+    renderWithProviders(<ShoeGrid {...defaultProps} shoes={mockShoes} selectedProvince="Utrecht" />)
     expect(screen.getByText(/Utrecht/)).toBeInTheDocument()
   })
 })

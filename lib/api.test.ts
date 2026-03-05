@@ -48,9 +48,7 @@ describe("updateShoe", () => {
   })
 
   it("throws when the API returns an error", async () => {
-    server.use(
-      http.put(`${BASE}/shoes/:id`, () => HttpResponse.json({}, { status: 500 }))
-    )
+    server.use(http.put(`${BASE}/shoes/:id`, () => HttpResponse.json({}, { status: 500 })))
     await expect(
       updateShoe(1, { title: "Updated", size: "33", province: "Noord-Holland" })
     ).rejects.toThrow("Failed to update shoe")
@@ -63,9 +61,7 @@ describe("deleteShoe", () => {
   })
 
   it("throws when the API returns an error", async () => {
-    server.use(
-      http.delete(`${BASE}/shoes/:id`, () => HttpResponse.json({}, { status: 500 }))
-    )
+    server.use(http.delete(`${BASE}/shoes/:id`, () => HttpResponse.json({}, { status: 500 })))
     await expect(deleteShoe(1)).rejects.toThrow("Failed to delete shoe")
   })
 })
@@ -78,9 +74,7 @@ describe("sendGeneralContact", () => {
   })
 
   it("throws when the API returns an error", async () => {
-    server.use(
-      http.post(`${BASE}/contact`, () => HttpResponse.json({}, { status: 500 }))
-    )
+    server.use(http.post(`${BASE}/contact`, () => HttpResponse.json({}, { status: 500 })))
     await expect(
       sendGeneralContact({ name: "Jan", email: "jan@example.com", message: "Hallo" })
     ).rejects.toThrow("Failed to send message")
