@@ -33,7 +33,7 @@ export function ShoeCard({ shoe, onContactClick }: ShoeCardProps) {
       <Card className="group overflow-hidden border-border bg-card py-0 transition-shadow hover:shadow-lg">
         <div className="relative aspect-[4/3] overflow-hidden">
           <img
-            src={shoe.image}
+            src={shoe.image ?? "/placeholder.jpg"}
             alt={shoe.title}
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
           />

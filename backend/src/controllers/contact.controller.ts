@@ -15,7 +15,45 @@ interface ContactRequest {
   shoeTitle: string
 }
 
+interface GeneralContactRequest {
+  name: string
+  email: string
+  message: string
+}
+
 export class ContactController {
+  @post('/contact')
+  @response(200, {description: 'General contact message sent'})
+  async general(@requestBody() body: GeneralContactRequest): Promise<{ok: boolean}> {
+    const {name, email, message} = body
+
+    const {error: ownerError} = await resend.emails.send({
+      from: 'onboarding@resend.dev',
+      to: [process.env.CONTACT_EMAIL!],
+      replyTo: email,
+      subject: `Nieuw contactbericht van ${name}`,
+      text: `${name} (${email}) heeft een bericht gestuurd via Voetbal-Ruil:\n\n${message}`,
+    })
+
+    if (ownerError) {
+      console.error('Resend error (general contact):', ownerError)
+      throw new HttpErrors.InternalServerError('Failed to send email')
+    }
+
+    const {error: confirmError} = await resend.emails.send({
+      from: 'onboarding@resend.dev',
+      to: [email],
+      subject: 'Bedankt voor je bericht — Voetbal-Ruil',
+      text: `Hallo ${name},\n\nBedankt voor je bericht. We nemen zo snel mogelijk contact met je op.\n\nJouw bericht:\n${message}\n\nVoetbalRuil`,
+    })
+
+    if (confirmError) {
+      console.error('Resend error (general confirm):', confirmError)
+    }
+
+    return {ok: true}
+  }
+
   @post('/contacts')
   @response(200, {description: 'Contact message sent'})
   async create(@requestBody() body: ContactRequest): Promise<{ok: boolean}> {

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import {
   Dialog,
   DialogContent,
@@ -40,6 +40,11 @@ export function ContactModal({ open, onOpenChange, shoeId, shoeTitle }: ContactM
     setError(null)
     setSent(false)
   }
+
+  useEffect(() => {
+    if (!open) return
+    reset()
+  }, [shoeId, open])
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault()

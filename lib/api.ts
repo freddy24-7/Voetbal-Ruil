@@ -36,6 +36,19 @@ export async function uploadImage(file: File): Promise<string> {
   return data.url
 }
 
+export async function sendGeneralContact(data: {
+  name: string
+  email: string
+  message: string
+}): Promise<void> {
+  const res = await fetch(`${API_URL}/contact`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(data),
+  })
+  if (!res.ok) throw new Error('Failed to send message')
+}
+
 export async function createContact(data: {
   name: string
   email: string

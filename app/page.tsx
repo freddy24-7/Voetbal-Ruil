@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { LanguageProvider } from "@/lib/language-context"
 import { SiteHeader } from "@/components/site-header"
 import { HeroSection } from "@/components/hero-section"
+import { AboutSection } from "@/components/about-section"
 import { ShoeGrid } from "@/components/shoe-grid"
 import { ContactModal } from "@/components/contact-modal"
 import { UploadModal } from "@/components/upload-modal"
@@ -45,6 +46,7 @@ function VoetbalRuilApp() {
           selectedProvince={selectedProvince}
           onProvinceChange={setSelectedProvince}
         />
+        <AboutSection />
         <ShoeGrid
           shoes={shoes}
           loading={loading}
