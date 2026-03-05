@@ -1,7 +1,8 @@
 "use client"
 
 import { useCallback, useState } from "react"
-import { ImagePlus, Upload } from "lucide-react"
+import { ImagePlus, Upload, Loader2 } from "lucide-react"
+import { createShoe } from "@/lib/api"
 import {
   Dialog,
   DialogContent,
@@ -26,12 +27,18 @@ import { provinces } from "@/lib/translations"
 type UploadModalProps = {
   open: boolean
   onOpenChange: (open: boolean) => void
+  onSuccess?: () => void
 }
 
-export function UploadModal({ open, onOpenChange }: UploadModalProps) {
+export function UploadModal({ open, onOpenChange, onSuccess }: UploadModalProps) {
   const { t } = useLanguage()
   const [dragActive, setDragActive] = useState(false)
   const [fileName, setFileName] = useState<string | null>(null)
+  const [title, setTitle] = useState("")
+  const [size, setSize] = useState("")
+  const [province, setProvince] = useState("")
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleDrag = useCallback((e: React.DragEvent) => {
     e.preventDefault()
@@ -61,14 +68,36 @@ export function UploadModal({ open, onOpenChange }: UploadModalProps) {
     []
   )
 
+  const reset = () => {
+    setTitle("")
+    setSize("")
+    setProvince("")
+    setFileName(null)
+    setDragActive(false)
+    setError(null)
+  }
+
+  const handleSubmit = async (e: React.SyntheticEvent) => {
+    e.preventDefault()
+    setSubmitting(true)
+    setError(null)
+    try {
+      await createShoe({title, size, province})
+      reset()
+      onOpenChange(false)
+      onSuccess?.()
+    } catch {
+      setError("Failed to submit. Please try again.")
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
   return (
     <Dialog
       open={open}
       onOpenChange={(isOpen) => {
-        if (!isOpen) {
-          setFileName(null)
-          setDragActive(false)
-        }
+        if (!isOpen) reset()
         onOpenChange(isOpen)
       }}
     >
@@ -77,19 +106,14 @@ export function UploadModal({ open, onOpenChange }: UploadModalProps) {
           <DialogTitle className="font-mono">{t.uploadTitle}</DialogTitle>
           <DialogDescription>{t.uploadDescription}</DialogDescription>
         </DialogHeader>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault()
-            setFileName(null)
-            onOpenChange(false)
-          }}
-          className="flex flex-col gap-4"
-        >
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
             <Label htmlFor="upload-title">{t.title}</Label>
             <Input
               id="upload-title"
               placeholder={t.titlePlaceholder}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
               required
             />
           </div>
@@ -100,19 +124,21 @@ export function UploadModal({ open, onOpenChange }: UploadModalProps) {
               <Input
                 id="upload-size"
                 placeholder={t.sizePlaceholder}
+                value={size}
+                onChange={(e) => setSize(e.target.value)}
                 required
               />
             </div>
             <div className="flex flex-col gap-2">
               <Label>{t.province}</Label>
-              <Select required>
+              <Select value={province} onValueChange={setProvince} required>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder={t.selectProvince} />
                 </SelectTrigger>
                 <SelectContent>
-                  {provinces.map((province) => (
-                    <SelectItem key={province} value={province}>
-                      {province}
+                  {provinces.map((p) => (
+                    <SelectItem key={p} value={p}>
+                      {p}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -137,19 +163,13 @@ export function UploadModal({ open, onOpenChange }: UploadModalProps) {
               {fileName ? (
                 <>
                   <ImagePlus className="mb-2 size-8 text-primary" />
-                  <p className="text-sm font-medium text-foreground">
-                    {fileName}
-                  </p>
+                  <p className="text-sm font-medium text-foreground">{fileName}</p>
                 </>
               ) : (
                 <>
                   <ImagePlus className="mb-2 size-8 text-muted-foreground" />
-                  <p className="text-sm font-medium text-foreground">
-                    {t.dropzoneText}
-                  </p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    {t.dropzoneHint}
-                  </p>
+                  <p className="text-sm font-medium text-foreground">{t.dropzoneText}</p>
+                  <p className="mt-1 text-xs text-muted-foreground">{t.dropzoneHint}</p>
                 </>
               )}
               <input
@@ -162,12 +182,19 @@ export function UploadModal({ open, onOpenChange }: UploadModalProps) {
             </label>
           </div>
 
+          {error && <p className="text-sm text-destructive">{error}</p>}
+
           <DialogFooter>
             <Button
               type="submit"
+              disabled={submitting || !title || !size || !province}
               className="w-full bg-gradient-to-r from-[#1A59FC] to-[#0C90FF] text-[#FFFFFF] hover:from-[#1550E0] hover:to-[#0A80E8] sm:w-auto"
             >
-              <Upload className="size-4" />
+              {submitting ? (
+                <Loader2 className="size-4 animate-spin" />
+              ) : (
+                <Upload className="size-4" />
+              )}
               {t.uploadButton}
             </Button>
           </DialogFooter>

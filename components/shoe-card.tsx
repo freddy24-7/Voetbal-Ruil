@@ -14,7 +14,7 @@ type ShoeCardProps = {
     title: string
     province: string
     size: string
-    image: string
+    image?: string
   }
   onContactClick: () => void
 }

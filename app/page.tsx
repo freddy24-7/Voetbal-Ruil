@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { LanguageProvider } from "@/lib/language-context"
 import { SiteHeader } from "@/components/site-header"
 import { HeroSection } from "@/components/hero-section"
@@ -8,15 +8,30 @@ import { ShoeGrid } from "@/components/shoe-grid"
 import { ContactModal } from "@/components/contact-modal"
 import { UploadModal } from "@/components/upload-modal"
 import { SiteFooter } from "@/components/site-footer"
-import { type mockShoes } from "@/lib/translations"
+import { fetchShoes } from "@/lib/api"
+import type { Shoe } from "@/lib/types"
 
 function VoetbalRuilApp() {
   const [selectedProvince, setSelectedProvince] = useState("all")
   const [contactOpen, setContactOpen] = useState(false)
   const [uploadOpen, setUploadOpen] = useState(false)
-  const [selectedShoe, setSelectedShoe] = useState<(typeof mockShoes)[0] | null>(null)
+  const [selectedShoe, setSelectedShoe] = useState<Shoe | null>(null)
+  const [shoes, setShoes] = useState<Shoe[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
-  const handleContactClick = (shoe: (typeof mockShoes)[0]) => {
+  const loadShoes = () => {
+    setLoading(true)
+    setError(null)
+    fetchShoes(selectedProvince)
+      .then(setShoes)
+      .catch(() => setError("Could not load shoes. Is the backend running?"))
+      .finally(() => setLoading(false))
+  }
+
+  useEffect(() => { loadShoes() }, [selectedProvince])
+
+  const handleContactClick = (shoe: Shoe) => {
     setSelectedShoe(shoe)
     setContactOpen(true)
   }
@@ -31,6 +46,9 @@ function VoetbalRuilApp() {
           onProvinceChange={setSelectedProvince}
         />
         <ShoeGrid
+          shoes={shoes}
+          loading={loading}
+          error={error}
           selectedProvince={selectedProvince}
           onContactClick={handleContactClick}
         />
@@ -41,9 +59,10 @@ function VoetbalRuilApp() {
       <ContactModal
         open={contactOpen}
         onOpenChange={setContactOpen}
+        shoeId={selectedShoe?.id}
         shoeTitle={selectedShoe?.title}
       />
-      <UploadModal open={uploadOpen} onOpenChange={setUploadOpen} />
+      <UploadModal open={uploadOpen} onOpenChange={setUploadOpen} onSuccess={loadShoes} />
     </div>
   )
 }

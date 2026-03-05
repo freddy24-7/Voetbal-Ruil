@@ -53,6 +53,6 @@ __decorate([
     __metadata("design:type", String)
 ], Shoe.prototype, "image", void 0);
 exports.Shoe = Shoe = __decorate([
-    (0, repository_1.model)({ settings: { strict: false } }),
+    (0, repository_1.model)({ settings: { mysql: { table: 'shoe' } } }),
     __metadata("design:paramtypes", [Object])
 ], Shoe);
