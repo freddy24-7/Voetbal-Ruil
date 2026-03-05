@@ -92,6 +92,15 @@ export const translations = {
     contactSectionSubtitle: "Heb je een vraag of opmerking? Stuur ons een bericht en we reageren zo snel mogelijk.",
     contactSectionSent: "Bedankt voor je bericht! We nemen zo snel mogelijk contact met je op.",
     generalMessagePlaceholder: "Jouw bericht...",
+    // Errors
+    errorLoadShoes: "Kan schoenen niet laden. Staat de backend aan?",
+    errorSendMessage: "Verzenden mislukt. Probeer het opnieuw.",
+    errorSubmitListing: "Plaatsen mislukt. Probeer het opnieuw.",
+    errorSaveChanges: "Opslaan mislukt. Probeer het opnieuw.",
+    // Accessibility
+    toggleTheme: "Thema wisselen",
+    openMenu: "Menu openen",
+    navigationMenu: "Navigatiemenu",
     // Footer
     privacy: "Privacy",
     terms: "Algemene Voorwaarden",
@@ -188,6 +197,15 @@ export const translations = {
     contactSectionSubtitle: "Have a question or a comment? Send us a message and we'll get back to you as soon as possible.",
     contactSectionSent: "Thanks for your message! We'll get back to you as soon as possible.",
     generalMessagePlaceholder: "Your message...",
+    // Errors
+    errorLoadShoes: "Could not load shoes. Is the backend running?",
+    errorSendMessage: "Failed to send message. Please try again.",
+    errorSubmitListing: "Failed to submit. Please try again.",
+    errorSaveChanges: "Failed to save changes. Please try again.",
+    // Accessibility
+    toggleTheme: "Toggle theme",
+    openMenu: "Open menu",
+    navigationMenu: "Navigation menu",
     // Footer
     privacy: "Privacy",
     terms: "Terms of Service",

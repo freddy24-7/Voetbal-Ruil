@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { LanguageProvider } from "@/lib/language-context"
+import { LanguageProvider, useLanguage } from "@/lib/language-context"
 import { SiteHeader } from "@/components/site-header"
 import { HeroSection } from "@/components/hero-section"
 import { AboutSection } from "@/components/about-section"
@@ -15,6 +15,7 @@ import { removeOwnedShoe } from "@/lib/owned-shoes"
 import type { Shoe } from "@/lib/types"
 
 function VoetbalRuilApp() {
+  const { t } = useLanguage()
   const [selectedProvince, setSelectedProvince] = useState("all")
   const [contactOpen, setContactOpen] = useState(false)
   const [uploadOpen, setUploadOpen] = useState(false)
@@ -29,7 +30,7 @@ function VoetbalRuilApp() {
     setError(null)
     fetchShoes(selectedProvince)
       .then(setShoes)
-      .catch(() => setError("Could not load shoes. Is the backend running?"))
+      .catch(() => setError(t.errorLoadShoes))
       .finally(() => setLoading(false))
   }
 

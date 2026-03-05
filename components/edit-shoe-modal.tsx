@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { ImagePlus, Loader2, Save } from "lucide-react"
 import { updateShoe, uploadImage } from "@/lib/api"
 import {
@@ -42,6 +42,10 @@ export function EditShoeModal({ open, onOpenChange, shoe, onSuccess }: Props) {
   const [dragActive, setDragActive] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [coolingDown, setCoolingDown] = useState(false)
+  const cooldownTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => () => { if (cooldownTimer.current) clearTimeout(cooldownTimer.current) }, [])
 
   useEffect(() => {
     if (shoe) {
@@ -85,7 +89,10 @@ export function EditShoeModal({ open, onOpenChange, shoe, onSuccess }: Props) {
       onOpenChange(false)
       onSuccess()
     } catch {
-      setError("Failed to save changes. Please try again.")
+      setError(t.errorSaveChanges)
+      if (cooldownTimer.current) clearTimeout(cooldownTimer.current)
+      setCoolingDown(true)
+      cooldownTimer.current = setTimeout(() => setCoolingDown(false), 8000)
     } finally {
       setSubmitting(false)
     }
@@ -98,7 +105,7 @@ export function EditShoeModal({ open, onOpenChange, shoe, onSuccess }: Props) {
           <DialogTitle className="font-mono">{t.editTitle}</DialogTitle>
           <DialogDescription>{shoe?.title}</DialogDescription>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit} aria-busy={submitting} className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
             <Label htmlFor="edit-title">{t.title}</Label>
             <Input
@@ -120,9 +127,9 @@ export function EditShoeModal({ open, onOpenChange, shoe, onSuccess }: Props) {
               />
             </div>
             <div className="flex flex-col gap-2">
-              <Label>{t.province}</Label>
+              <Label htmlFor="edit-province">{t.province}</Label>
               <Select value={province} onValueChange={setProvince}>
-                <SelectTrigger className="w-full">
+                <SelectTrigger id="edit-province" className="w-full">
                   <SelectValue placeholder={t.selectProvince} />
                 </SelectTrigger>
                 <SelectContent>
@@ -138,6 +145,14 @@ export function EditShoeModal({ open, onOpenChange, shoe, onSuccess }: Props) {
             <Label>{t.photo}</Label>
             <label
               htmlFor="edit-file"
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault()
+                  document.getElementById("edit-file")?.click()
+                }
+              }}
               onDragEnter={handleDrag}
               onDragLeave={handleDrag}
               onDragOver={handleDrag}
@@ -164,12 +179,12 @@ export function EditShoeModal({ open, onOpenChange, shoe, onSuccess }: Props) {
             </label>
           </div>
 
-          {error && <p className="text-sm text-destructive">{error}</p>}
+          {error && <p role="alert" aria-live="assertive" className="text-sm text-destructive">{error}</p>}
 
           <DialogFooter>
             <Button
               type="submit"
-              disabled={submitting || !title || !size || !province}
+              disabled={submitting || coolingDown || !title || !size || !province}
               className="w-full bg-gradient-to-r from-[#1A59FC] to-[#0C90FF] text-[#FFFFFF] hover:from-[#1550E0] hover:to-[#0A80E8] sm:w-auto"
             >
               {submitting ? <Loader2 className="size-4 animate-spin" /> : <Save className="size-4" />}

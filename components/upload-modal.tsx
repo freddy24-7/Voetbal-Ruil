@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { ImagePlus, Upload, Loader2 } from "lucide-react"
 import { createShoe, uploadImage } from "@/lib/api"
 import { addOwnedShoe } from "@/lib/owned-shoes"
@@ -41,6 +41,10 @@ export function UploadModal({ open, onOpenChange, onSuccess }: UploadModalProps)
   const [province, setProvince] = useState("")
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [coolingDown, setCoolingDown] = useState(false)
+  const cooldownTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => () => { if (cooldownTimer.current) clearTimeout(cooldownTimer.current) }, [])
 
   const handleDrag = useCallback((e: React.DragEvent) => {
     e.preventDefault()
@@ -99,7 +103,10 @@ export function UploadModal({ open, onOpenChange, onSuccess }: UploadModalProps)
       onOpenChange(false)
       onSuccess?.()
     } catch {
-      setError("Failed to submit. Please try again.")
+      setError(t.errorSubmitListing)
+      if (cooldownTimer.current) clearTimeout(cooldownTimer.current)
+      setCoolingDown(true)
+      cooldownTimer.current = setTimeout(() => setCoolingDown(false), 8000)
     } finally {
       setSubmitting(false)
     }
@@ -118,7 +125,7 @@ export function UploadModal({ open, onOpenChange, onSuccess }: UploadModalProps)
           <DialogTitle className="font-mono">{t.uploadTitle}</DialogTitle>
           <DialogDescription>{t.uploadDescription}</DialogDescription>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit} aria-busy={submitting} className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
             <Label htmlFor="upload-title">{t.title}</Label>
             <Input
@@ -142,9 +149,9 @@ export function UploadModal({ open, onOpenChange, onSuccess }: UploadModalProps)
               />
             </div>
             <div className="flex flex-col gap-2">
-              <Label>{t.province}</Label>
+              <Label htmlFor="upload-province">{t.province}</Label>
               <Select value={province} onValueChange={setProvince} required>
-                <SelectTrigger className="w-full">
+                <SelectTrigger id="upload-province" className="w-full">
                   <SelectValue placeholder={t.selectProvince} />
                 </SelectTrigger>
                 <SelectContent>
@@ -162,6 +169,14 @@ export function UploadModal({ open, onOpenChange, onSuccess }: UploadModalProps)
             <Label>{t.photo}</Label>
             <label
               htmlFor="upload-file"
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault()
+                  document.getElementById("upload-file")?.click()
+                }
+              }}
               onDragEnter={handleDrag}
               onDragLeave={handleDrag}
               onDragOver={handleDrag}
@@ -194,12 +209,12 @@ export function UploadModal({ open, onOpenChange, onSuccess }: UploadModalProps)
             </label>
           </div>
 
-          {error && <p className="text-sm text-destructive">{error}</p>}
+          {error && <p role="alert" aria-live="assertive" className="text-sm text-destructive">{error}</p>}
 
           <DialogFooter>
             <Button
               type="submit"
-              disabled={submitting || !title || !size || !province}
+              disabled={submitting || coolingDown || !title || !size || !province}
               className="w-full bg-gradient-to-r from-[#1A59FC] to-[#0C90FF] text-[#FFFFFF] hover:from-[#1550E0] hover:to-[#0A80E8] sm:w-auto"
             >
               {submitting ? (

@@ -60,7 +60,7 @@ export function SiteHeader({ onUploadClick }: { onUploadClick: () => void }) {
           >
             <Sun className="size-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
             <Moon className="absolute size-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            <span className="sr-only">Toggle theme</span>
+            <span className="sr-only">{t.toggleTheme}</span>
           </Button>
 
           {/* Upload Button */}
@@ -89,17 +89,17 @@ export function SiteHeader({ onUploadClick }: { onUploadClick: () => void }) {
           >
             <Sun className="size-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
             <Moon className="absolute size-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            <span className="sr-only">Toggle theme</span>
+            <span className="sr-only">{t.toggleTheme}</span>
           </Button>
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon-sm" className="text-[#A8C5CC] hover:bg-[#1A4550] hover:text-[#E8F0F2]">
                 <Menu className="size-5" />
-                <span className="sr-only">Menu</span>
+                <span className="sr-only">{t.openMenu}</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="border-border bg-[#0A3038] text-[#E8F0F2]">
-              <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+              <SheetTitle className="sr-only">{t.navigationMenu}</SheetTitle>
               <nav className="flex flex-col gap-4 pt-8">
                 <a
                   href="#about"

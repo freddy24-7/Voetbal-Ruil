@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Send, Loader2 } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 import { sendGeneralContact } from "@/lib/api"
@@ -30,6 +30,10 @@ export function GeneralContactModal({ open, onOpenChange }: Props) {
   const [submitting, setSubmitting] = useState(false)
   const [sent, setSent] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [coolingDown, setCoolingDown] = useState(false)
+  const cooldownTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => () => { if (cooldownTimer.current) clearTimeout(cooldownTimer.current) }, [])
 
   const reset = () => {
     setName("")
@@ -53,7 +57,10 @@ export function GeneralContactModal({ open, onOpenChange }: Props) {
       onOpenChange(false)
       reset()
     } catch {
-      setError("Failed to send message. Please try again.")
+      setError(t.errorSendMessage)
+      if (cooldownTimer.current) clearTimeout(cooldownTimer.current)
+      setCoolingDown(true)
+      cooldownTimer.current = setTimeout(() => setCoolingDown(false), 8000)
     } finally {
       setSubmitting(false)
     }
@@ -63,14 +70,14 @@ export function GeneralContactModal({ open, onOpenChange }: Props) {
     <Dialog open={open} onOpenChange={(isOpen) => { if (!isOpen) reset(); onOpenChange(isOpen) }}>
       <DialogContent className="sm:max-w-md">
         {sent ? (
-          <p className="py-10 text-center text-sm font-medium text-primary">{t.contactSectionSent}</p>
+          <p role="status" aria-live="polite" className="py-10 text-center text-sm font-medium text-primary">{t.contactSectionSent}</p>
         ) : (
           <>
             <DialogHeader>
               <DialogTitle className="font-mono">{t.contactSectionTitle}</DialogTitle>
               <DialogDescription>{t.contactSectionSubtitle}</DialogDescription>
             </DialogHeader>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <form onSubmit={handleSubmit} aria-busy={submitting} className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
                 <Label htmlFor="gc-name">{t.name}</Label>
                 <Input
@@ -104,12 +111,12 @@ export function GeneralContactModal({ open, onOpenChange }: Props) {
                 />
               </div>
 
-              {error && <p className="text-sm text-destructive">{error}</p>}
+              {error && <p role="alert" aria-live="assertive" className="text-sm text-destructive">{error}</p>}
 
               <DialogFooter>
                 <Button
                   type="submit"
-                  disabled={submitting || !name || !email || !message}
+                  disabled={submitting || coolingDown || !name || !email || !message}
                   className="w-full bg-gradient-to-r from-[#1A59FC] to-[#0C90FF] text-[#FFFFFF] hover:from-[#1550E0] hover:to-[#0A80E8] sm:w-auto"
                 >
                   {submitting ? (
