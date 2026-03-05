@@ -17,6 +17,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["src", "app", "components", "hooks", "lib"],
+  "include": ["src", "app", "components", "hooks", "lib", "vitest.config.mts"],
   "exclude": ["node_modules", "backend/dist"]
 }

@@ -19,7 +19,7 @@ let Shoe = class Shoe extends repository_1.Entity {
 exports.Shoe = Shoe;
 __decorate([
     (0, repository_1.property)({
-        type: 'number',
+        type: "number",
         id: true,
         generated: true,
     }),
@@ -27,32 +27,32 @@ __decorate([
 ], Shoe.prototype, "id", void 0);
 __decorate([
     (0, repository_1.property)({
-        type: 'string',
+        type: "string",
         required: true,
     }),
     __metadata("design:type", String)
 ], Shoe.prototype, "title", void 0);
 __decorate([
     (0, repository_1.property)({
-        type: 'string',
+        type: "string",
         required: true,
     }),
     __metadata("design:type", String)
 ], Shoe.prototype, "size", void 0);
 __decorate([
     (0, repository_1.property)({
-        type: 'string',
+        type: "string",
         required: true,
     }),
     __metadata("design:type", String)
 ], Shoe.prototype, "province", void 0);
 __decorate([
     (0, repository_1.property)({
-        type: 'string',
+        type: "string",
     }),
     __metadata("design:type", String)
 ], Shoe.prototype, "image", void 0);
 exports.Shoe = Shoe = __decorate([
-    (0, repository_1.model)({ settings: { mysql: { table: 'shoe' } } }),
+    (0, repository_1.model)({ settings: { mysql: { table: "shoe" } } }),
     __metadata("design:paramtypes", [Object])
 ], Shoe);

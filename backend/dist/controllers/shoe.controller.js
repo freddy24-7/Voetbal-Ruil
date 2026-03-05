@@ -39,42 +39,42 @@ let ShoeController = class ShoeController {
 };
 exports.ShoeController = ShoeController;
 __decorate([
-    (0, rest_1.post)('/shoes'),
-    (0, rest_1.response)(200, { description: 'Shoe created' }),
+    (0, rest_1.post)("/shoes"),
+    (0, rest_1.response)(200, { description: "Shoe created" }),
     __param(0, (0, rest_1.requestBody)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], ShoeController.prototype, "create", null);
 __decorate([
-    (0, rest_1.get)('/shoes'),
-    (0, rest_1.response)(200, { description: 'Array of shoes' }),
-    __param(0, rest_1.param.query.string('province')),
+    (0, rest_1.get)("/shoes"),
+    (0, rest_1.response)(200, { description: "Array of shoes" }),
+    __param(0, rest_1.param.query.string("province")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], ShoeController.prototype, "find", null);
 __decorate([
-    (0, rest_1.get)('/shoes/{id}'),
-    (0, rest_1.response)(200, { description: 'Shoe by id' }),
-    __param(0, rest_1.param.path.number('id')),
+    (0, rest_1.get)("/shoes/{id}"),
+    (0, rest_1.response)(200, { description: "Shoe by id" }),
+    __param(0, rest_1.param.path.number("id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], ShoeController.prototype, "findById", null);
 __decorate([
-    (0, rest_1.put)('/shoes/{id}'),
-    (0, rest_1.response)(204, { description: 'Shoe updated' }),
-    __param(0, rest_1.param.path.number('id')),
+    (0, rest_1.put)("/shoes/{id}"),
+    (0, rest_1.response)(204, { description: "Shoe updated" }),
+    __param(0, rest_1.param.path.number("id")),
     __param(1, (0, rest_1.requestBody)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], ShoeController.prototype, "updateById", null);
 __decorate([
-    (0, rest_1.del)('/shoes/{id}'),
-    (0, rest_1.response)(204, { description: 'Shoe deleted' }),
-    __param(0, rest_1.param.path.number('id')),
+    (0, rest_1.del)("/shoes/{id}"),
+    (0, rest_1.response)(204, { description: "Shoe deleted" }),
+    __param(0, rest_1.param.path.number("id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)

@@ -1,6 +1,6 @@
 "use client"
 
-import { Upload, Sun, Moon, Menu } from "lucide-react"
+import { Code2, Upload, Sun, Moon, Menu } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useState } from "react"
 
@@ -10,12 +10,13 @@ import { useLanguage } from "@/lib/language-context"
 
 type MobileMenuProps = {
   onUploadClick: () => void
+  onTechClick: () => void
   onClose: () => void
   open: boolean
   onOpenChange: (open: boolean) => void
 }
 
-function MobileMenu({ onUploadClick, onClose, open, onOpenChange }: MobileMenuProps) {
+function MobileMenu({ onUploadClick, onTechClick, onClose, open, onOpenChange }: MobileMenuProps) {
   const { locale, setLocale, t } = useLanguage()
   const { theme, setTheme } = useTheme()
 
@@ -68,9 +69,19 @@ function MobileMenu({ onUploadClick, onClose, open, onOpenChange }: MobileMenuPr
             <Button
               onClick={() => {
                 onClose()
+                onTechClick()
+              }}
+              className="mt-2 bg-orange-500 text-white hover:bg-orange-600"
+            >
+              <Code2 className="size-4" />
+              Tech
+            </Button>
+            <Button
+              onClick={() => {
+                onClose()
                 onUploadClick()
               }}
-              className="mt-2 bg-gradient-to-r from-[#1A59FC] to-[#0C90FF] text-[#FFFFFF] hover:from-[#1550E0] hover:to-[#0A80E8]"
+              className="bg-gradient-to-r from-[#1A59FC] to-[#0C90FF] text-[#FFFFFF] hover:from-[#1550E0] hover:to-[#0A80E8]"
             >
               <Upload className="size-4" />
               {t.upload}
@@ -82,7 +93,13 @@ function MobileMenu({ onUploadClick, onClose, open, onOpenChange }: MobileMenuPr
   )
 }
 
-export function SiteHeader({ onUploadClick }: { onUploadClick: () => void }) {
+export function SiteHeader({
+  onUploadClick,
+  onTechClick,
+}: {
+  onUploadClick: () => void
+  onTechClick: () => void
+}) {
   const { locale, setLocale, t } = useLanguage()
   const { theme, setTheme } = useTheme()
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -135,6 +152,13 @@ export function SiteHeader({ onUploadClick }: { onUploadClick: () => void }) {
             <span className="sr-only">{t.toggleTheme}</span>
           </Button>
           <Button
+            onClick={onTechClick}
+            className="bg-orange-500 text-white hover:bg-orange-600"
+          >
+            <Code2 className="size-4" />
+            Tech
+          </Button>
+          <Button
             onClick={onUploadClick}
             className="bg-gradient-to-r from-[#1A59FC] to-[#0C90FF] text-[#FFFFFF] hover:from-[#1550E0] hover:to-[#0A80E8]"
           >
@@ -145,6 +169,7 @@ export function SiteHeader({ onUploadClick }: { onUploadClick: () => void }) {
 
         <MobileMenu
           onUploadClick={onUploadClick}
+          onTechClick={onTechClick}
           open={mobileOpen}
           onOpenChange={setMobileOpen}
           onClose={() => setMobileOpen(false)}

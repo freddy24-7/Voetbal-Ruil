@@ -24,6 +24,6 @@ let ShoeRepository = class ShoeRepository extends repository_1.DefaultCrudReposi
 };
 exports.ShoeRepository = ShoeRepository;
 exports.ShoeRepository = ShoeRepository = __decorate([
-    __param(0, (0, core_1.inject)('datasources.mysql')),
+    __param(0, (0, core_1.inject)("datasources.mysql")),
     __metadata("design:paramtypes", [mysql_datasource_1.MysqlDataSource])
 ], ShoeRepository);

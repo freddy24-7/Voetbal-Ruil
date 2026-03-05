@@ -9,6 +9,7 @@ import { HeroSection } from "@/components/hero-section"
 import { ShoeGrid } from "@/components/shoe-grid"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
+import { TechModal } from "@/components/tech-modal"
 import { UploadModal } from "@/components/upload-modal"
 import { fetchShoes, deleteShoe } from "@/lib/api"
 import { LanguageProvider, useLanguage } from "@/lib/language-context"
@@ -21,6 +22,7 @@ function VoetbalRuilApp() {
   const [contactOpen, setContactOpen] = useState(false)
   const [uploadOpen, setUploadOpen] = useState(false)
   const [editOpen, setEditOpen] = useState(false)
+  const [techOpen, setTechOpen] = useState(false)
   const [selectedShoe, setSelectedShoe] = useState<Shoe | null>(null)
   const [shoes, setShoes] = useState<Shoe[]>([])
   const [loading, setLoading] = useState(true)
@@ -57,7 +59,7 @@ function VoetbalRuilApp() {
 
   return (
     <div className="bg-background flex min-h-screen flex-col">
-      <SiteHeader onUploadClick={() => setUploadOpen(true)} />
+      <SiteHeader onUploadClick={() => setUploadOpen(true)} onTechClick={() => setTechOpen(true)} />
 
       <main className="flex-1">
         <HeroSection selectedProvince={selectedProvince} onProvinceChange={setSelectedProvince} />
@@ -81,6 +83,7 @@ function VoetbalRuilApp() {
         shoeId={selectedShoe?.id}
         shoeTitle={selectedShoe?.title}
       />
+      <TechModal open={techOpen} onOpenChange={setTechOpen} />
       <UploadModal open={uploadOpen} onOpenChange={setUploadOpen} onSuccess={loadShoes} />
       <EditShoeModal
         open={editOpen}

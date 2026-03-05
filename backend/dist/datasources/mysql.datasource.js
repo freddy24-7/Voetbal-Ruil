@@ -46,11 +46,11 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MysqlDataSource = void 0;
+const path = __importStar(require("path"));
 const core_1 = require("@loopback/core");
 const repository_1 = require("@loopback/repository");
 const dotenv = __importStar(require("dotenv"));
-const path = __importStar(require("path"));
-dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
+dotenv.config({ path: path.resolve(__dirname, "../../../.env") });
 function parseDbUrl(url) {
     const parsed = new URL(url);
     return {
@@ -58,13 +58,13 @@ function parseDbUrl(url) {
         port: parseInt(parsed.port) || 3306,
         user: parsed.username,
         password: parsed.password,
-        database: parsed.pathname.replace(/^\//, ''),
+        database: parsed.pathname.replace(/^\//, ""),
     };
 }
 const dbConfig = parseDbUrl(process.env.DB_URL);
 const config = {
-    name: 'mysql',
-    connector: 'mysql',
+    name: "mysql",
+    connector: "mysql",
     ...dbConfig,
 };
 let MysqlDataSource = class MysqlDataSource extends repository_1.juggler.DataSource {
@@ -73,10 +73,10 @@ let MysqlDataSource = class MysqlDataSource extends repository_1.juggler.DataSou
     }
 };
 exports.MysqlDataSource = MysqlDataSource;
-MysqlDataSource.dataSourceName = 'mysql';
+MysqlDataSource.dataSourceName = "mysql";
 MysqlDataSource.defaultConfig = config;
 exports.MysqlDataSource = MysqlDataSource = __decorate([
-    (0, core_1.lifeCycleObserver)('datasource'),
-    __param(0, (0, core_1.inject)('datasources.config.mysql', { optional: true })),
+    (0, core_1.lifeCycleObserver)("datasource"),
+    __param(0, (0, core_1.inject)("datasources.config.mysql", { optional: true })),
     __metadata("design:paramtypes", [Object])
 ], MysqlDataSource);

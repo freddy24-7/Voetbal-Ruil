@@ -6,10 +6,10 @@ async function main(config = {}) {
     const app = new application_1.BackendApplication({
         rest: {
             port: 3001,
-            host: '0.0.0.0',
+            host: "0.0.0.0",
             cors: {
-                origin: '*',
-                methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+                origin: "*",
+                methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
             },
         },
         ...config,
@@ -19,8 +19,8 @@ async function main(config = {}) {
     return app;
 }
 if (require.main === module) {
-    main().catch(err => {
-        console.error('Cannot start the application.', err);
+    main().catch((err) => {
+        console.error("Cannot start the application.", err);
         process.exit(1);
     });
 }
