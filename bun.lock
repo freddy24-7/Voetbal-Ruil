@@ -66,8 +66,6 @@
         "zod": "^3.24.1",
       },
       "devDependencies": {
-        "@rollup/rollup-linux-x64-gnu": "^4.59.0",
-        "@swc/core-linux-x64-gnu": "^1.15.18",
         "@tailwindcss/postcss": "^4.2.0",
         "@testing-library/jest-dom": "^6.9.1",
         "@testing-library/react": "^16.3.2",
@@ -89,7 +87,6 @@
         "eslint-plugin-react-hooks": "^4",
         "happy-dom": "^20.8.3",
         "jsdom": "^28.1.0",
-        "lightningcss-linux-x64-gnu": "^1.31.1",
         "msw": "^2.12.10",
         "postcss": "^8.5",
         "prettier": "^3.8.1",
@@ -100,6 +97,11 @@
         "typescript": "5.7.3",
         "vite": "^6.0.0",
         "vitest": "^4.0.18",
+      },
+      "optionalDependencies": {
+        "@rollup/rollup-linux-x64-gnu": "^4.59.0",
+        "@swc/core-linux-x64-gnu": "^1.15.18",
+        "lightningcss-linux-x64-gnu": "^1.31.1",
       },
     },
   },
