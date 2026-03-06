@@ -11,6 +11,7 @@
     "build:frontend": "vite build",
     "build:backend": "tsc -p backend/tsconfig.json",
     "preview": "vite preview",
+    "start": "serve dist -l ${PORT:-3000}",
     "test:prod": "bun run build && bun run preview",
     "dev:backend": "tsc -p backend/tsconfig.json && node backend/dist/main.js",
     "seed": "tsc -p backend/tsconfig.json && node backend/dist/seed.js",
@@ -77,6 +78,7 @@
     "recharts": "2.15.0",
     "reflect-metadata": "^0.2.2",
     "resend": "^6.9.3",
+    "serve": "^14.2.4",
     "sonner": "^1.7.1",
     "tailwind-merge": "^3.3.1",
     "uuid": "8.3.2",
@@ -92,6 +94,7 @@
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "^4.59.0",
     "@swc/core-linux-x64-gnu": "^1.15.18",
+    "@tailwindcss/oxide-linux-x64-gnu": "^4.2.0",
     "lightningcss-linux-x64-gnu": "^1.31.1"
   },
   "devDependencies": {
