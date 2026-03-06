@@ -91,6 +91,7 @@
   },
   "devDependencies": {
     "@rollup/rollup-linux-x64-gnu": "^4.59.0",
+    "@swc/core-linux-x64-gnu": "^1.15.18",
     "@tailwindcss/postcss": "^4.2.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
