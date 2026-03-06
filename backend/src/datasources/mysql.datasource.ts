@@ -8,12 +8,14 @@ dotenv.config({ path: path.resolve(__dirname, "../../../.env") })
 
 function parseDbUrl(url: string) {
   const parsed = new URL(url)
+  const sslMode = parsed.searchParams.get("ssl-mode")
   return {
     host: parsed.hostname,
     port: parseInt(parsed.port) || 3306,
     user: parsed.username,
     password: parsed.password,
     database: parsed.pathname.replace(/^\//, ""),
+    ...(sslMode ? { ssl: { rejectUnauthorized: false } } : {}),
   }
 }
 

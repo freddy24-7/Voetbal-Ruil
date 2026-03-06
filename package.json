@@ -90,6 +90,7 @@
     "uuid": "8.3.2"
   },
   "devDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.59.0",
     "@tailwindcss/postcss": "^4.2.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
