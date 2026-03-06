@@ -2,6 +2,8 @@
 
 A bilingual (Dutch/English) marketplace for trading second-hand children's football shoes across the Netherlands. Parents can list their kids' outgrown boots, browse listings by province, and contact sellers directly.
 
+Live demo: [voetbal-ruil-frontend.up.railway.app](https://voetbal-ruil-frontend.up.railway.app) · Source: [github.com/freddy24-7/Voetbal-Ruil](https://github.com/freddy24-7/Voetbal-Ruil)
+
 ## Features
 
 - Browse and filter shoe listings by Dutch province
@@ -39,11 +41,20 @@ A bilingual (Dutch/English) marketplace for trading second-hand children's footb
 | [Cloudinary](https://cloudinary.com)                | Image hosting         |
 | [Resend](https://resend.com)                        | Transactional email   |
 
-### Tooling
+### Tooling & Testing
 
 - **ESLint 8** with `@typescript-eslint`, `eslint-plugin-react`, `jsx-a11y`, `import`
 - **Prettier 3** with `prettier-plugin-tailwindcss`
 - **bun** as the package manager
+- **Vitest 4** — unit & component test runner
+- **React Testing Library** — component rendering and interaction tests
+- **MSW 2** — API mocking via `msw/node` service worker in tests
+
+### Infrastructure
+
+- **Railway** — frontend (static bundle via `serve`) and backend (Node.js) as separate services
+- **Railway MySQL** — managed relational database on the same private network as the backend
+- **Cloudinary** — image hosting and CDN
 
 ## Project Structure
 
@@ -52,23 +63,27 @@ voetbal-ruil/
 ├── app/                    # Page component (entry point for the SPA)
 ├── components/             # React components
 │   ├── ui/                 # shadcn/ui primitives (auto-generated, not linted)
-│   ├── dropzone-field.tsx  # Reusable drag-and-drop file input
 │   ├── shoe-card.tsx       # Individual listing card
 │   ├── shoe-grid.tsx       # Listings grid with loading/error states
 │   ├── site-header.tsx     # Sticky nav with mobile sheet menu
-│   ├── site-footer.tsx     # Footer with links and contact popup
 │   ├── contact-modal.tsx   # Contact a seller
 │   ├── upload-modal.tsx    # Create a new listing
 │   ├── edit-shoe-modal.tsx # Edit an existing listing
 │   └── ...
 ├── lib/
 │   ├── api.ts              # Typed fetch wrappers for the backend API
-│   ├── hooks/
-│   │   └── use-form-cooldown.ts  # Shared cooldown hook for form submission
 │   ├── language-context.tsx      # i18n context provider
 │   ├── owned-shoes.ts      # localStorage helper for tracking own listings
 │   ├── translations.ts     # Dutch & English string tables + province list
 │   └── types.ts            # Shared TypeScript types (Shoe, etc.)
+├── src/
+│   └── test/
+│       ├── setup.ts        # Vitest setup: jest-dom, MSW server, browser stubs
+│       ├── msw/
+│       │   ├── handlers.ts # MSW request handlers with fixture data
+│       │   └── server.ts   # MSW Node server instance
+│       └── helpers/
+│           └── render.tsx  # renderWithProviders() helper
 ├── backend/
 │   └── src/
 │       ├── controllers/    # REST endpoints: shoes, contact, upload
@@ -131,13 +146,40 @@ bun run dev          # Vite dev server on http://localhost:5173
 bun run dev:backend  # LoopBack API on http://localhost:3001
 ```
 
-### Other Scripts
+### Scripts
 
 ```bash
-bun run build          # Production build (frontend)
+bun run build          # Production build (backend + frontend)
+bun run build:frontend # Build frontend only (Vite)
 bun run build:backend  # Compile backend TypeScript
+bun run test           # Run test suite (Vitest)
+bun run test:coverage  # Run tests with coverage report
 bun run lint           # Run ESLint
 bun run lint:fix       # Auto-fix ESLint issues
 bun run format         # Format with Prettier
 bun run format:check   # Check formatting without writing
+```
+
+## Deployment (Railway)
+
+The project is deployed as two Railway services from a single repository.
+
+### Backend service
+
+- **Build command:** `bun run build:backend`
+- **Start command:** `node backend/dist/main.js`
+- **Environment variables:** `DB_URL`, `PORT`, `CORS_ORIGIN`, `CLOUDINARY_URL`, `CLOUDINARY_FOLDER`, `RESEND_API_KEY`, `CONTACT_EMAIL`
+
+### Frontend service
+
+- **Build command:** `bun install && bun run build:frontend`
+- **Start command:** `bun run start` (`serve dist -l ${PORT:-3000}`)
+- **Environment variables:** `VITE_API_URL` (must be set before the build runs — Vite bakes it into the bundle)
+
+`VITE_API_URL` should be set to the public URL of the backend Railway service (e.g. `https://voetbal-ruil-production.up.railway.app`).
+
+To seed the Railway database from your local machine, use `MYSQL_PUBLIC_URL` from the Railway MySQL service:
+
+```bash
+DB_URL="<MYSQL_PUBLIC_URL>" bun run seed
 ```

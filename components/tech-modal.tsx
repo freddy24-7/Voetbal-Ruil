@@ -54,11 +54,11 @@ const productionGaps = [
   },
   {
     title: "Testing",
-    desc: "No automated tests exist. Production readiness requires unit tests (Vitest), component tests (Testing Library), and end-to-end tests (Playwright or Cypress).",
+    desc: "A Vitest + React Testing Library + MSW test suite covers utility functions, API wrappers, and key components (30 tests). End-to-end tests (Playwright or Cypress) are not yet implemented.",
   },
   {
     title: "CI/CD pipeline",
-    desc: "There is no build, lint, or test pipeline. A production project needs GitHub Actions (or similar) to run checks on every pull request and automate deployments.",
+    desc: "No automated CI pipeline is configured. GitHub Actions could be added to run lint, type-check, and the test suite on every pull request and trigger Railway deployments on merge.",
   },
   {
     title: "Error monitoring & observability",
@@ -74,7 +74,7 @@ const productionGaps = [
   },
   {
     title: "Production infrastructure",
-    desc: "The backend runs on a local port with a hardcoded CORS wildcard. Production needs HTTPS, a reverse proxy (e.g. nginx), environment-specific CORS, database connection pooling, and a deployment target (e.g. Railway, Fly.io, AWS).",
+    desc: "The application is deployed on Railway: the frontend is served as a static bundle, the backend runs as a Node.js service, and the database is Railway MySQL. HTTPS is provided by Railway, and CORS is configured per environment via an environment variable.",
   },
 ]
 
@@ -145,6 +145,20 @@ export function TechModal({ open, onOpenChange }: Props) {
                 </div>
               ))}
             </div>
+          </section>
+
+          <section className="border-t pt-4">
+            <p className="text-muted-foreground text-xs">
+              Source code:{" "}
+              <a
+                href="https://github.com/freddy24-7/Voetbal-Ruil"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground underline underline-offset-2 hover:opacity-75"
+              >
+                github.com/freddy24-7/Voetbal-Ruil
+              </a>
+            </p>
           </section>
         </div>
       </DialogContent>
